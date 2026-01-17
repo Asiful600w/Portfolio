@@ -18,7 +18,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.19.0' # Adjust this to your local version if needed
           cache: true
 
       - name: Get Dependencies
@@ -28,7 +27,7 @@ jobs:
         run: flutter analyze
 
       - name: Build Web Application
-        run: flutter build web --release --base-href "/portfolio_hero/" 
+        run: flutter build web --release --base-href "/portfolio/" 
         # IMPORTANT: Replace '/portfolio_hero/' with '/<repository-name>/' if your repo name is different.
         # If deploying to a custom domain (e.g. user.github.io), remove the --base-href argument or set it to "/"
 
