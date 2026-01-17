@@ -18,7 +18,7 @@ class BackgroundLayers extends StatelessWidget {
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001) // perspective
                 ..rotateX(0.2) // 10deg roughly
-                ..scale(1.5, 1.5, 1.5),
+                ..multiply(Matrix4.diagonal3Values(1.5, 1.5, 1.5)),
               child: CustomPaint(painter: GridPainter()),
             ),
           ),
