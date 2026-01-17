@@ -75,7 +75,7 @@ class _DotPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.primary.withOpacity(0.15)
+      ..color = AppColors.primary.withValues(alpha: 0.15)
       ..style = PaintingStyle.fill;
 
     // Draw simple grid of dots
@@ -95,13 +95,12 @@ class _CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint1 = Paint()
-      ..color = AppColors.primary.withOpacity(0.1)
+      ..color = AppColors.primary.withValues(alpha: 0.1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
     final paint2 = Paint()
-      ..color = const Color(0xFF8F27E6)
-          .withOpacity(0.1) // Accent Violet
+      ..color = const Color(0xFF8F27E6).withValues(alpha: 0.1) // Accent Violet
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
@@ -155,22 +154,20 @@ class _TopSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(
+              width: 8,
+              height: 8,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
                     color: AppColors.primary,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary,
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                      ),
-                    ],
+                    blurRadius: 8,
+                    spreadRadius: 1,
                   ),
-                )
-                .animate(onPlay: (c) => c.repeat(reverse: true))
-                .scale(
+                ],
+              ),
+            ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(
                   begin: const Offset(0.8, 0.8),
                   end: const Offset(1.2, 1.2),
                 ),
@@ -202,9 +199,9 @@ class _TopSection extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.02),
+                      color: Colors.white.withValues(alpha: 0.02),
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -294,7 +291,7 @@ class _SendButtonState extends State<_SendButton> {
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.3),
+              color: AppColors.primary.withValues(alpha: 0.3),
               blurRadius: 15,
             ),
           ],
@@ -369,9 +366,8 @@ class _SystemEnvironment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: isMobile
-          ? CrossAxisAlignment.center
-          : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         _EnvItem(
           label: "SYSTEM ENVIRONMENT",
@@ -517,9 +513,8 @@ class _SocialRelay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: isMobile
-          ? CrossAxisAlignment.center
-          : CrossAxisAlignment.end,
+      crossAxisAlignment:
+          isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.end,
       children: [
         Text(
           "SOCIAL_RELAY",
@@ -574,7 +569,7 @@ class _SocialNodeState extends State<_SocialNode> {
           borderRadius: BorderRadius.circular(4),
           border: Border.all(
             color: _isHovered
-                ? const Color(0xFF8F27E6).withOpacity(0.5)
+                ? const Color(0xFF8F27E6).withValues(alpha: 0.5)
                 : Colors.white10,
           ),
           boxShadow: _isHovered
@@ -602,7 +597,7 @@ class _BottomStatusBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.white.withOpacity(0.02),
+      color: Colors.white.withValues(alpha: 0.02),
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
@@ -623,7 +618,7 @@ class _BottomStatusBar extends StatelessWidget {
                     width: 6,
                     height: 6,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.2),
+                      color: AppColors.primary.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -643,9 +638,9 @@ class _BottomStatusBar extends StatelessWidget {
   }
 
   TextStyle get _statusStyle => GoogleFonts.spaceGrotesk(
-    fontSize: 8,
-    color: Colors.white24,
-    letterSpacing: 5,
-    fontWeight: FontWeight.bold,
-  );
+        fontSize: 8,
+        color: Colors.white24,
+        letterSpacing: 5,
+        fontWeight: FontWeight.bold,
+      );
 }

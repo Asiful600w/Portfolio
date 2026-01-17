@@ -57,9 +57,8 @@ class _HeroTextContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: centered
-          ? CrossAxisAlignment.center
-          : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         // Available Badge
@@ -165,20 +164,18 @@ class _AvailableBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(0.1),
-        border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+        color: AppColors.primary.withValues(alpha: 0.1),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(color: AppColors.primary),
-              )
-              .animate(onPlay: (c) => c.repeat(reverse: true))
-              .custom(
+            width: 8,
+            height: 8,
+            decoration: const BoxDecoration(color: AppColors.primary),
+          ).animate(onPlay: (c) => c.repeat(reverse: true)).custom(
                 duration: 1.seconds,
                 builder: (context, value, child) {
                   return Container(
@@ -187,7 +184,8 @@ class _AvailableBadge extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.5 * value),
+                          color:
+                              AppColors.primary.withValues(alpha: 0.5 * value),
                           blurRadius: 5 + (10 * value),
                           spreadRadius: 2 * value,
                         ),
@@ -233,7 +231,9 @@ class _GradientText extends StatelessWidget {
             color: Colors.white, // required for shader mask
           ),
         ),
-      ).animate(onPlay: (c) => c.repeat()).shimmer(duration: 3.seconds, delay: 2.seconds),
+      )
+          .animate(onPlay: (c) => c.repeat())
+          .shimmer(duration: 3.seconds, delay: 2.seconds),
     );
   }
 }
@@ -260,7 +260,7 @@ class _PrimaryButtonState extends State<_PrimaryButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           transform: _isHovered
-              ? (Matrix4.identity()..translate(0, -4, 0))
+              ? Matrix4.translationValues(0, -4, 0)
               : Matrix4.identity(),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -279,7 +279,7 @@ class _PrimaryButtonState extends State<_PrimaryButton> {
                     widthFactor: _isHovered ? 1.0 : 0.0,
                     alignment: Alignment.centerLeft,
                     child: ColoredBox(
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                     ),
                   ),
                 ),
@@ -336,7 +336,7 @@ class _SecondaryButtonState extends State<_SecondaryButton> {
         onTap: () {
           showDialog(
             context: context,
-            barrierColor: Colors.black.withOpacity(0.8),
+            barrierColor: Colors.black.withValues(alpha: 0.8),
             builder: (context) => const ContactDialog(),
           );
         },
@@ -346,17 +346,17 @@ class _SecondaryButtonState extends State<_SecondaryButton> {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           decoration: BoxDecoration(
             color: _isHovered
-                ? Colors.white.withOpacity(0.1)
+                ? Colors.white.withValues(alpha: 0.1)
                 : Colors.transparent,
             border: Border.all(
               color: _isHovered
-                  ? Colors.white.withOpacity(0.4)
+                  ? Colors.white.withValues(alpha: 0.4)
                   : Colors.white24,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
           transform: _isHovered
-              ? (Matrix4.identity()..translate(0, -4, 0))
+              ? Matrix4.translationValues(0, -4, 0)
               : Matrix4.identity(),
           child: const Text(
             "Contact Me",
@@ -417,16 +417,14 @@ class _HeroVisuals extends StatelessWidget {
           // Outer Wing (Blue/Purple)
           // Outer Wing (Blue/Purple)
           RepaintBoundary(
-                child: _AbstractShard(
-                  width: 300,
-                  height: 80,
-                  color: Colors.blueAccent.withOpacity(0.2),
-                  rotate: 45,
-                  offset: const Offset(-20, -100),
-                ),
-              )
-              .animate(onPlay: (c) => c.repeat(reverse: true))
-              .moveY(
+            child: _AbstractShard(
+              width: 300,
+              height: 80,
+              color: Colors.blueAccent.withOpacity(0.2),
+              rotate: 45,
+              offset: const Offset(-20, -100),
+            ),
+          ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
                 begin: 0,
                 end: -20,
                 duration: 4.seconds,
@@ -436,16 +434,14 @@ class _HeroVisuals extends StatelessWidget {
           // Middle Wing (Primary/Blue)
           // Middle Wing (Primary/Blue)
           RepaintBoundary(
-                child: _AbstractShard(
-                  width: 350,
-                  height: 90,
-                  color: AppColors.primary.withOpacity(0.25),
-                  rotate: 45,
-                  offset: const Offset(40, 0),
-                ),
-              )
-              .animate(onPlay: (c) => c.repeat(reverse: true))
-              .moveY(
+            child: _AbstractShard(
+              width: 350,
+              height: 90,
+              color: AppColors.primary.withValues(alpha: 0.25),
+              rotate: 45,
+              offset: const Offset(40, 0),
+            ),
+          ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
                 begin: 0,
                 end: 20,
                 delay: 1.seconds,
@@ -456,16 +452,14 @@ class _HeroVisuals extends StatelessWidget {
           // Bottom Wing (Cyan/Primary)
           // Bottom Wing (Cyan/Primary)
           RepaintBoundary(
-                child: _AbstractShard(
-                  width: 250,
-                  height: 70,
-                  color: Colors.cyanAccent.withOpacity(0.2),
-                  rotate: 45,
-                  offset: const Offset(0, 100),
-                ),
-              )
-              .animate(onPlay: (c) => c.repeat(reverse: true))
-              .moveY(
+            child: _AbstractShard(
+              width: 250,
+              height: 70,
+              color: Colors.cyanAccent.withOpacity(0.2),
+              rotate: 45,
+              offset: const Offset(0, 100),
+            ),
+          ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
                 begin: 0,
                 end: -15,
                 delay: 2.seconds,
@@ -477,21 +471,18 @@ class _HeroVisuals extends StatelessWidget {
           Positioned(
             top: 100,
             right: 50,
-            child:
-                RepaintBoundary(
-                      child: const _GlassCard(
-                        icon: Icons.flutter_dash,
-                        title: "Widget Build",
-                        subtitle: "StatefulWidget",
-                      ),
-                    )
-                    .animate(onPlay: (c) => c.repeat(reverse: true))
-                    .moveY(
-                      begin: 0,
-                      end: 15,
-                      duration: 3.seconds,
-                      curve: Curves.easeInOut,
-                    ),
+            child: RepaintBoundary(
+              child: const _GlassCard(
+                icon: Icons.flutter_dash,
+                title: "Widget Build",
+                subtitle: "StatefulWidget",
+              ),
+            ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
+                  begin: 0,
+                  end: 15,
+                  duration: 3.seconds,
+                  curve: Curves.easeInOut,
+                ),
           ),
 
           Positioned(
@@ -540,13 +531,13 @@ class _AbstractShard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             gradient: LinearGradient(
-              colors: [color, color.withOpacity(0.05)],
+              colors: [color, color.withValues(alpha: 0.05)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            border: Border.all(color: Colors.white.withOpacity(0.1)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
             boxShadow: [
-              BoxShadow(color: color.withOpacity(0.1), blurRadius: 30),
+              BoxShadow(color: color.withValues(alpha: 0.1), blurRadius: 30),
             ],
           ),
           child: Container(
@@ -575,7 +566,7 @@ class _GlassCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(20, 20, 20, 0.6),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
         borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
@@ -624,7 +615,7 @@ class _CodeCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color.fromRGBO(20, 20, 20, 0.6),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
           borderRadius: BorderRadius.circular(16),
           boxShadow: const [
             BoxShadow(
@@ -651,7 +642,7 @@ class _CodeCard extends StatelessWidget {
             const SizedBox(height: 8),
             _line(width: 80, color: Colors.white12),
             const SizedBox(height: 8),
-            _line(width: 100, color: AppColors.primary.withOpacity(0.3)),
+            _line(width: 100, color: AppColors.primary.withValues(alpha: 0.3)),
           ],
         ),
       ),
@@ -659,16 +650,16 @@ class _CodeCard extends StatelessWidget {
   }
 
   Widget _dot(Color color) => Container(
-    width: 8,
-    height: 8,
-    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-  );
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      );
   Widget _line({required double width, required Color color}) => Container(
-    width: width,
-    height: 6,
-    decoration: BoxDecoration(
-      color: color,
-      borderRadius: BorderRadius.circular(4),
-    ),
-  );
+        width: width,
+        height: 6,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(4),
+        ),
+      );
 }

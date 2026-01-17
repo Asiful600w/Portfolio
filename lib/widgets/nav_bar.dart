@@ -174,7 +174,7 @@ class _HoverTextState extends State<HoverText> {
           shadows: _isHovered
               ? [
                   Shadow(
-                    color: widget.hoverColor.withOpacity(0.4),
+                    color: widget.hoverColor.withValues(alpha: 0.4),
                     blurRadius: 20,
                   ),
                 ]

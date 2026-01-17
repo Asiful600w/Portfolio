@@ -92,7 +92,6 @@ class _ProfileCard extends StatelessWidget {
               child: CustomPaint(painter: _NeuralLinesPainter()),
             ),
           ),
-
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -105,57 +104,57 @@ class _ProfileCard extends StatelessWidget {
                   children: [
                     // Outer Ring
                     Container(
-                          width: 320,
-                          height: 320,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.primary.withValues(alpha: 0.2),
-                              width: 1,
-                            ),
-                          ),
-                        )
+                      width: 320,
+                      height: 320,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.primary.withValues(alpha: 0.2),
+                          width: 1,
+                        ),
+                      ),
+                    )
                         .animate(onPlay: (c) => c.repeat())
                         .rotate(duration: 15.seconds),
 
                     // Rotating Dot Container
                     SizedBox(
-                          width: 320,
-                          height: 320,
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              margin: const EdgeInsets.only(top: 0),
-                              decoration: const BoxDecoration(
+                      width: 320,
+                      height: 320,
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                          width: 8,
+                          height: 8,
+                          margin: const EdgeInsets.only(top: 0),
+                          decoration: const BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
                                 color: AppColors.primary,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.primary,
-                                    blurRadius: 10,
-                                  ),
-                                ],
+                                blurRadius: 10,
                               ),
-                            ),
+                            ],
                           ),
-                        )
+                        ),
+                      ),
+                    )
                         .animate(onPlay: (c) => c.repeat())
                         .rotate(duration: 15.seconds),
 
                     // Middle Ring
                     Container(
-                          width: 280,
-                          height: 280,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.1),
-                              width: 1,
-                            ),
-                          ),
-                        )
+                      width: 280,
+                      height: 280,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          width: 1,
+                        ),
+                      ),
+                    )
                         .animate(onPlay: (c) => c.repeat(reverse: false))
                         .rotate(begin: 1, end: 0, duration: 25.seconds),
 
@@ -183,50 +182,48 @@ class _ProfileCard extends StatelessWidget {
 
                     // Scanner Text
                     Container(
-                          width: 260,
-                          height: 260,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.primary.withValues(alpha: 0.3),
+                      width: 260,
+                      height: 260,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.primary.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            color: Colors.black,
+                            child: const Text(
+                              "SCANNING",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: AppColors.primary,
+                              ),
                             ),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                color: Colors.black,
-                                child: const Text(
-                                  "SCANNING",
-                                  style: TextStyle(
-                                    fontSize: 8,
-                                    color: AppColors.primary,
-                                  ),
-                                ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            color: Colors.black,
+                            child: const Text(
+                              "ID: DEV-01",
+                              style: TextStyle(
+                                fontSize: 8,
+                                color: AppColors.primary,
                               ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                color: Colors.black,
-                                child: const Text(
-                                  "ID: DEV-01",
-                                  style: TextStyle(
-                                    fontSize: 8,
-                                    color: AppColors.primary,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        )
-                        .animate(onPlay: (c) => c.repeat(reverse: true))
-                        .scale(
+                        ],
+                      ),
+                    ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(
                           begin: const Offset(1.1, 1.1),
                           end: const Offset(1.0, 1.0),
                           duration: 2.seconds,
@@ -248,13 +245,13 @@ class _ProfileCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                        width: 6,
-                        height: 6,
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          shape: BoxShape.circle,
-                        ),
-                      )
+                    width: 6,
+                    height: 6,
+                    decoration: const BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                  )
                       .animate(onPlay: (c) => c.repeat(reverse: true))
                       .fadeIn(duration: 500.ms),
                   const SizedBox(width: 8),
@@ -355,138 +352,134 @@ class _BioCardState extends State<_BioCard> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
                 RichText(
-                      text: TextSpan(
-                        style: AppTextStyles.heroTitle.copyWith(
-                          fontSize: 64,
-                          height: 0.9,
-                        ),
-                        children: [
-                          const TextSpan(text: "Digital_\n"),
-                          TextSpan(
-                            text: "Architect",
-                            style: TextStyle(
-                              color: Colors.transparent,
-                              shadows: [
-                                Shadow(
-                                  color: Colors.white,
-                                  offset: const Offset(0, -5),
-                                ),
-                              ],
+                  text: TextSpan(
+                    style: AppTextStyles.heroTitle.copyWith(
+                      fontSize: 64,
+                      height: 0.9,
+                    ),
+                    children: [
+                      const TextSpan(text: "Digital_\n"),
+                      TextSpan(
+                        text: "Architect",
+                        style: TextStyle(
+                          color: Colors.transparent,
+                          shadows: [
+                            Shadow(
+                              color: Colors.white,
+                              offset: const Offset(0, -5),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    )
+                    ],
+                  ),
+                )
                     .animate(target: _isVisible ? 1 : 0)
                     .fadeIn(duration: 800.ms, delay: 500.ms)
                     .slideY(begin: 0.2, end: 0, curve: Curves.easeOut),
                 const SizedBox(height: 32),
                 Container(
-                      padding: const EdgeInsets.only(left: 24),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          left: BorderSide(
-                            color: AppColors.primary.withValues(alpha: 0.2),
-                            width: 2,
+                  padding: const EdgeInsets.only(left: 24),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: BorderSide(
+                        color: AppColors.primary.withValues(alpha: 0.2),
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          style: AppTextStyles.body.copyWith(
+                            fontSize: 18,
+                            color: Colors.grey[400],
                           ),
+                          children: const [
+                            TextSpan(text: "Initializing "),
+                            TextSpan(
+                              text: "Flutter Engine",
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  "... I construct immersive digital ecosystems where performance meets aesthetic precision.",
+                            ),
+                          ],
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              style: AppTextStyles.body.copyWith(
-                                fontSize: 18,
-                                color: Colors.grey[400],
-                              ),
-                              children: const [
-                                TextSpan(text: "Initializing "),
-                                TextSpan(
-                                  text: "Flutter Engine",
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text:
-                                      "... I construct immersive digital ecosystems where performance meets aesthetic precision.",
-                                ),
-                              ],
-                            ),
+                      const SizedBox(height: 24),
+                      Text.rich(
+                        TextSpan(
+                          style: AppTextStyles.body.copyWith(
+                            fontSize: 18,
+                            color: Colors.grey[400],
                           ),
-                          const SizedBox(height: 24),
-                          Text.rich(
+                          children: const [
                             TextSpan(
-                              style: AppTextStyles.body.copyWith(
-                                fontSize: 18,
-                                color: Colors.grey[400],
-                              ),
-                              children: const [
-                                TextSpan(
-                                  text:
-                                      "Moving beyond static layouts, I engineer ",
-                                ),
-                                TextSpan(
-                                  text: "reactive interfaces",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text:
-                                      " that adapt and evolve. My code is the bridge between human intent and machine execution, rendered at 120fps.",
-                                ),
-                              ],
+                              text: "Moving beyond static layouts, I engineer ",
                             ),
-                          ),
-                        ],
+                            TextSpan(
+                              text: "reactive interfaces",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  " that adapt and evolve. My code is the bridge between human intent and machine execution, rendered at 120fps.",
+                            ),
+                          ],
+                        ),
                       ),
-                    )
+                    ],
+                  ),
+                )
                     .animate(target: _isVisible ? 1 : 0)
                     .fadeIn(duration: 800.ms, delay: 800.ms)
                     .slideX(begin: -0.05),
-
                 const SizedBox(height: 40),
-
                 Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        _Tag(
-                          icon: Icons.location_on,
-                          text: "DHAKA, BD",
-                          padding: widget.isDesktop
-                              ? const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                )
-                              : const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                          fontSize: widget.isDesktop ? 10 : 12,
-                        ),
-                        _Tag(
-                          icon: Icons.code,
-                          text: "Open Source",
-                          padding: widget.isDesktop
-                              ? const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                )
-                              : const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                          fontSize: widget.isDesktop ? 10 : 12,
-                        ),
-                      ],
-                    )
+                  spacing: 16,
+                  runSpacing: 16,
+                  children: [
+                    _Tag(
+                      icon: Icons.location_on,
+                      text: "DHAKA, BD",
+                      padding: widget.isDesktop
+                          ? const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            )
+                          : const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                      fontSize: widget.isDesktop ? 10 : 12,
+                    ),
+                    _Tag(
+                      icon: Icons.code,
+                      text: "Open Source",
+                      padding: widget.isDesktop
+                          ? const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            )
+                          : const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                      fontSize: widget.isDesktop ? 10 : 12,
+                    ),
+                  ],
+                )
                     .animate(target: _isVisible ? 1 : 0)
                     .fadeIn(delay: 1000.ms)
                     .slideY(begin: 0.2),
@@ -780,10 +773,11 @@ class _RadarChartPainter extends CustomPainter {
         final angle = (2 * math.pi * j) / sides - (math.pi / 2);
         final x = center.dx + r * math.cos(angle);
         final y = center.dy + r * math.sin(angle);
-        if (j == 0)
+        if (j == 0) {
           path.moveTo(x, y);
-        else
+        } else {
           path.lineTo(x, y);
+        }
       }
       path.close();
       canvas.drawPath(path, paint);

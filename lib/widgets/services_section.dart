@@ -51,100 +51,95 @@ class _ServicesSectionState extends State<ServicesSection> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Expanded(
-                          child:
-                              _ServiceCard(
-                                    title: "MVP Nexus",
-                                    subtitle: "CLASS: PROTOTYPE",
-                                    price: "100",
-                                    priceSuffix: "\$",
-                                    priceNote: "// PER PROJECT EXECUTION",
-                                    features: const [
-                                      "Rapid Prototyping",
-                                      "iOS & Android Build",
-                                      "Basic State Management",
-                                      "1 Month Support Vector",
-                                    ],
-                                    actionLabel: "INITIALIZE MVP",
-                                    icon:
-                                        Icons.api, // Placeholder for Cube icon
-                                    accentColor: AppColors.primary,
-                                    isMobile: isMobile,
-                                    useSpacer: true,
-                                  )
-                                  .animate(target: _isVisible ? 1 : 0)
-                                  .fadeIn(delay: 200.ms, duration: 600.ms)
-                                  .slideX(
-                                    begin: -0.2,
-                                    end: 0,
-                                    duration: 800.ms,
-                                    curve: Curves.easeOutBack,
-                                  ),
+                          child: _ServiceCard(
+                            title: "MVP Nexus",
+                            subtitle: "CLASS: PROTOTYPE",
+                            price: "100",
+                            priceSuffix: "\$",
+                            priceNote: "// PER PROJECT EXECUTION",
+                            features: const [
+                              "Rapid Prototyping",
+                              "iOS & Android Build",
+                              "Basic State Management",
+                              "1 Month Support Vector",
+                            ],
+                            actionLabel: "INITIALIZE MVP",
+                            icon: Icons.api, // Placeholder for Cube icon
+                            accentColor: AppColors.primary,
+                            isMobile: isMobile,
+                            useSpacer: true,
+                          )
+                              .animate(target: _isVisible ? 1 : 0)
+                              .fadeIn(delay: 200.ms, duration: 600.ms)
+                              .slideX(
+                                begin: -0.2,
+                                end: 0,
+                                duration: 800.ms,
+                                curve: Curves.easeOutBack,
+                              ),
                         ),
                         const SizedBox(width: 24),
                         Expanded(
-                          child:
-                              _ServiceCard(
-                                    title: "Innovation Core",
-                                    subtitle: "CLASS: SCALABLE",
-                                    price: "250",
-                                    priceSuffix: "\$",
-                                    priceNote: "// PER PROJECT EXECUTION",
-                                    features: const [
-                                      "Custom Animations Engine",
-                                      "Advanced API Integration",
-                                      "Scalable Architecture",
-                                      "CI/CD Pipeline Setup",
-                                      "3 Month Optimization",
-                                    ],
-                                    actionLabel: "DEPLOY CORE",
-                                    isRecommended: true,
-                                    icon: Icons
-                                        .radio_button_checked, // Placeholder for Core icon
-                                    accentColor: AppColors.primary,
-                                    isMobile: isMobile,
-                                    useSpacer: true,
-                                  )
-                                  .animate(target: _isVisible ? 1 : 0)
-                                  .fadeIn(delay: 400.ms, duration: 600.ms)
-                                  .slideY(
-                                    begin: 0.2,
-                                    end: 0,
-                                    duration: 800.ms,
-                                    curve: Curves.easeOutBack,
-                                  ),
+                          child: _ServiceCard(
+                            title: "Innovation Core",
+                            subtitle: "CLASS: SCALABLE",
+                            price: "250",
+                            priceSuffix: "\$",
+                            priceNote: "// PER PROJECT EXECUTION",
+                            features: const [
+                              "Custom Animations Engine",
+                              "Advanced API Integration",
+                              "Scalable Architecture",
+                              "CI/CD Pipeline Setup",
+                              "3 Month Optimization",
+                            ],
+                            actionLabel: "DEPLOY CORE",
+                            isRecommended: true,
+                            icon: Icons
+                                .radio_button_checked, // Placeholder for Core icon
+                            accentColor: AppColors.primary,
+                            isMobile: isMobile,
+                            useSpacer: true,
+                          )
+                              .animate(target: _isVisible ? 1 : 0)
+                              .fadeIn(delay: 400.ms, duration: 600.ms)
+                              .slideY(
+                                begin: 0.2,
+                                end: 0,
+                                duration: 800.ms,
+                                curve: Curves.easeOutBack,
+                              ),
                         ),
                         const SizedBox(width: 24),
                         Expanded(
-                          child:
-                              _ServiceCard(
-                                    title: "Enterprise Orbit",
-                                    subtitle: "CLASS: SYSTEMIC",
-                                    price: "Query",
-                                    priceSuffix: "REQ",
-                                    priceNote: "// ONGOING PARTNERSHIP",
-                                    features: const [
-                                      "Dedicated Squad",
-                                      "Microservices",
-                                      "AI/ML Integration",
-                                      "24/7 System Monitoring",
-                                    ],
-                                    actionLabel: "CONTACT COMMAND",
-                                    icon:
-                                        Icons.hub, // Placeholder for Orbit icon
-                                    accentColor: const Color(
-                                      0xFFA855F7,
-                                    ), // Purple accent
-                                    isMobile: isMobile,
-                                    useSpacer: true,
-                                  )
-                                  .animate(target: _isVisible ? 1 : 0)
-                                  .fadeIn(delay: 600.ms, duration: 600.ms)
-                                  .slideX(
-                                    begin: 0.2,
-                                    end: 0,
-                                    duration: 800.ms,
-                                    curve: Curves.easeOutBack,
-                                  ),
+                          child: _ServiceCard(
+                            title: "Enterprise Orbit",
+                            subtitle: "CLASS: SYSTEMIC",
+                            price: "Query",
+                            priceSuffix: "REQ",
+                            priceNote: "// ONGOING PARTNERSHIP",
+                            features: const [
+                              "Dedicated Squad",
+                              "Microservices",
+                              "AI/ML Integration",
+                              "24/7 System Monitoring",
+                            ],
+                            actionLabel: "CONTACT COMMAND",
+                            icon: Icons.hub, // Placeholder for Orbit icon
+                            accentColor: const Color(
+                              0xFFA855F7,
+                            ), // Purple accent
+                            isMobile: isMobile,
+                            useSpacer: true,
+                          )
+                              .animate(target: _isVisible ? 1 : 0)
+                              .fadeIn(delay: 600.ms, duration: 600.ms)
+                              .slideX(
+                                begin: 0.2,
+                                end: 0,
+                                duration: 800.ms,
+                                curve: Curves.easeOutBack,
+                              ),
                         ),
                       ],
                     ),
@@ -155,23 +150,23 @@ class _ServicesSectionState extends State<ServicesSection> {
                     children: [
                       _buildStackedCard(
                         _ServiceCard(
-                              title: "MVP Nexus",
-                              subtitle: "CLASS: PROTOTYPE",
-                              price: "3k",
-                              priceSuffix: "CR",
-                              priceNote: "// PER PROJECT EXECUTION",
-                              features: const [
-                                "Rapid Prototyping",
-                                "iOS & Android Build",
-                                "Basic State Management",
-                                "1 Month Support Vector",
-                              ],
-                              actionLabel: "INITIALIZE MVP",
-                              icon: Icons.api,
-                              accentColor: AppColors.primary,
-                              isMobile: isMobile,
-                              useSpacer: false,
-                            )
+                          title: "MVP Nexus",
+                          subtitle: "CLASS: PROTOTYPE",
+                          price: "3k",
+                          priceSuffix: "CR",
+                          priceNote: "// PER PROJECT EXECUTION",
+                          features: const [
+                            "Rapid Prototyping",
+                            "iOS & Android Build",
+                            "Basic State Management",
+                            "1 Month Support Vector",
+                          ],
+                          actionLabel: "INITIALIZE MVP",
+                          icon: Icons.api,
+                          accentColor: AppColors.primary,
+                          isMobile: isMobile,
+                          useSpacer: false,
+                        )
                             .animate(target: _isVisible ? 1 : 0)
                             .fadeIn(delay: 200.ms, duration: 600.ms)
                             .slideX(
@@ -184,25 +179,25 @@ class _ServicesSectionState extends State<ServicesSection> {
                       const SizedBox(height: 24),
                       _buildStackedCard(
                         _ServiceCard(
-                              title: "Innovation Core",
-                              subtitle: "CLASS: SCALABLE",
-                              price: "8.5k",
-                              priceSuffix: "CR",
-                              priceNote: "// PER PROJECT EXECUTION",
-                              features: const [
-                                "Custom Animations Engine",
-                                "Advanced API Integration",
-                                "Scalable Architecture",
-                                "CI/CD Pipeline Setup",
-                                "3 Month Optimization",
-                              ],
-                              actionLabel: "DEPLOY CORE",
-                              isRecommended: true,
-                              icon: Icons.radio_button_checked,
-                              accentColor: AppColors.primary,
-                              isMobile: isMobile,
-                              useSpacer: false,
-                            )
+                          title: "Innovation Core",
+                          subtitle: "CLASS: SCALABLE",
+                          price: "8.5k",
+                          priceSuffix: "CR",
+                          priceNote: "// PER PROJECT EXECUTION",
+                          features: const [
+                            "Custom Animations Engine",
+                            "Advanced API Integration",
+                            "Scalable Architecture",
+                            "CI/CD Pipeline Setup",
+                            "3 Month Optimization",
+                          ],
+                          actionLabel: "DEPLOY CORE",
+                          isRecommended: true,
+                          icon: Icons.radio_button_checked,
+                          accentColor: AppColors.primary,
+                          isMobile: isMobile,
+                          useSpacer: false,
+                        )
                             .animate(target: _isVisible ? 1 : 0)
                             .fadeIn(delay: 400.ms, duration: 600.ms)
                             .slideY(
@@ -215,23 +210,23 @@ class _ServicesSectionState extends State<ServicesSection> {
                       const SizedBox(height: 24),
                       _buildStackedCard(
                         _ServiceCard(
-                              title: "Enterprise Orbit",
-                              subtitle: "CLASS: SYSTEMIC",
-                              price: "Query",
-                              priceSuffix: "REQ",
-                              priceNote: "// ONGOING PARTNERSHIP",
-                              features: const [
-                                "Dedicated Squad",
-                                "Microservices",
-                                "AI/ML Integration",
-                                "24/7 System Monitoring",
-                              ],
-                              actionLabel: "CONTACT COMMAND",
-                              icon: Icons.hub,
-                              accentColor: const Color(0xFFA855F7),
-                              isMobile: isMobile,
-                              useSpacer: false,
-                            )
+                          title: "Enterprise Orbit",
+                          subtitle: "CLASS: SYSTEMIC",
+                          price: "Query",
+                          priceSuffix: "REQ",
+                          priceNote: "// ONGOING PARTNERSHIP",
+                          features: const [
+                            "Dedicated Squad",
+                            "Microservices",
+                            "AI/ML Integration",
+                            "24/7 System Monitoring",
+                          ],
+                          actionLabel: "CONTACT COMMAND",
+                          icon: Icons.hub,
+                          accentColor: const Color(0xFFA855F7),
+                          isMobile: isMobile,
+                          useSpacer: false,
+                        )
                             .animate(target: _isVisible ? 1 : 0)
                             .fadeIn(delay: 600.ms, duration: 600.ms)
                             .slideX(
@@ -273,10 +268,10 @@ class _SectionHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFF1A1F26),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 blurRadius: 10,
               ),
             ],
@@ -318,7 +313,7 @@ class _SectionHeader extends StatelessWidget {
                   color: AppColors.primary,
                   shadows: [
                     Shadow(
-                      color: AppColors.primary.withOpacity(0.5),
+                      color: AppColors.primary.withValues(alpha: 0.5),
                       blurRadius: 20,
                     ),
                   ],
@@ -382,8 +377,8 @@ class _ServiceCardState extends State<_ServiceCard> {
   @override
   Widget build(BuildContext context) {
     final borderColor = widget.isRecommended || _isHovered
-        ? widget.accentColor.withOpacity(0.5)
-        : Colors.white.withOpacity(0.05);
+        ? widget.accentColor.withValues(alpha: 0.5)
+        : Colors.white.withValues(alpha: 0.05);
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -392,13 +387,13 @@ class _ServiceCardState extends State<_ServiceCard> {
         duration: 300.ms,
         padding: EdgeInsets.all(widget.isMobile ? 24 : 32),
         decoration: BoxDecoration(
-          color: const Color(0xFF0F1419).withOpacity(0.8),
+          color: const Color(0xFF0F1419).withValues(alpha: 0.8),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: borderColor, width: 1.5),
           boxShadow: [
             if (widget.isRecommended || _isHovered)
               BoxShadow(
-                color: widget.accentColor.withOpacity(0.15),
+                color: widget.accentColor.withValues(alpha: 0.15),
                 blurRadius: 40,
                 offset: const Offset(0, 10),
               ),
@@ -416,10 +411,10 @@ class _ServiceCardState extends State<_ServiceCard> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.2),
+                    color: AppColors.primary.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: AppColors.primary.withOpacity(0.5),
+                      color: AppColors.primary.withValues(alpha: 0.5),
                     ),
                   ),
                   child: Text(
@@ -459,33 +454,33 @@ class _ServiceCardState extends State<_ServiceCard> {
                   ],
                 ),
                 Icon(
-                      widget.icon,
-                      size: 40,
-                      color: _isHovered
-                          ? widget.accentColor
-                          : widget.accentColor.withOpacity(0.5),
-                    )
+                  widget.icon,
+                  size: 40,
+                  color: _isHovered
+                      ? widget.accentColor
+                      : widget.accentColor.withValues(alpha: 0.5),
+                )
                     .animate(target: _isHovered ? 1 : 0)
                     .scale(
                       begin: const Offset(1, 1),
                       end: const Offset(1.1, 1.1),
                     )
                     .custom(
-                      builder: (context, value, child) {
-                        return ShaderMask(
-                          shaderCallback: (bounds) => RadialGradient(
-                            center: Alignment.center,
-                            radius: 0.5,
-                            colors: [
-                              widget.accentColor,
-                              widget.accentColor.withOpacity(0.0),
-                            ],
-                            stops: const [0.5, 1.0],
-                          ).createShader(bounds),
-                          child: child,
-                        );
-                      },
-                    ),
+                  builder: (context, value, child) {
+                    return ShaderMask(
+                      shaderCallback: (bounds) => RadialGradient(
+                        center: Alignment.center,
+                        radius: 0.5,
+                        colors: [
+                          widget.accentColor,
+                          widget.accentColor.withValues(alpha: 0.0),
+                        ],
+                        stops: const [0.5, 1.0],
+                      ).createShader(bounds),
+                      child: child,
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 32),
@@ -560,14 +555,14 @@ class _ServiceCardState extends State<_ServiceCard> {
                   gradient: _isHovered
                       ? LinearGradient(
                           colors: [
-                            widget.accentColor.withOpacity(0.2),
-                            widget.accentColor.withOpacity(0.1),
+                            widget.accentColor.withValues(alpha: 0.2),
+                            widget.accentColor.withValues(alpha: 0.1),
                           ],
                         )
                       : null,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: widget.accentColor.withOpacity(0.3),
+                    color: widget.accentColor.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Text(

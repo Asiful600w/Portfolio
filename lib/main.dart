@@ -21,13 +21,13 @@ class PortfolioApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.backgroundDark,
         colorScheme: const ColorScheme.dark(
           primary: AppColors.primary,
-          background: AppColors.backgroundDark,
+          surface: AppColors.backgroundDark,
         ),
         textTheme: GoogleFonts.spaceGroteskTextTheme(
           Theme.of(context).textTheme.apply(
-            bodyColor: Colors.white,
-            displayColor: Colors.white,
-          ),
+                bodyColor: Colors.white,
+                displayColor: Colors.white,
+              ),
         ),
       ),
       home: const BootLoaderScreen(),

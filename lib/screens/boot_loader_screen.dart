@@ -176,11 +176,11 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                     color: Colors.white,
                     shadows: [
                       Shadow(
-                        color: AppColors.primary.withOpacity(0.5),
+                        color: AppColors.primary.withValues(alpha: 0.5),
                         blurRadius: 10,
                       ),
                       Shadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 20,
                       ),
                     ],
@@ -194,7 +194,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                   style: GoogleFonts.spaceGrotesk(
                     fontSize: 12,
                     letterSpacing: 3.0,
-                    color: AppColors.primary.withOpacity(0.6),
+                    color: AppColors.primary.withValues(alpha: 0.6),
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -225,9 +225,9 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.white.withOpacity(0.05)),
+          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
         ),
-        color: AppColors.backgroundDark.withOpacity(0.5),
+        color: AppColors.backgroundDark.withValues(alpha: 0.5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -241,7 +241,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 12,
                   letterSpacing: 2.0,
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -283,11 +283,12 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
               width: 6,
               height: 6,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.5 + (_pulseController.value * 0.5)),
+                color: color.withValues(
+                    alpha: 0.5 + (_pulseController.value * 0.5)),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(_pulseController.value),
+                    color: color.withValues(alpha: _pulseController.value),
                     blurRadius: 6,
                   ),
                 ],
@@ -315,7 +316,10 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: RadialGradient(
-              colors: [AppColors.primary.withOpacity(0.1), Colors.transparent],
+              colors: [
+                AppColors.primary.withValues(alpha: 0.1),
+                Colors.transparent
+              ],
               radius: 0.7,
             ),
           ),
@@ -330,7 +334,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
               child: CustomPaint(
                 size: const Size(200, 200),
                 painter: DashedRingPainter(
-                  color: AppColors.primary.withOpacity(0.3),
+                  color: AppColors.primary.withValues(alpha: 0.3),
                 ),
               ),
             );
@@ -343,7 +347,8 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
           height: 160,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+            border: Border.all(
+                color: Colors.white.withValues(alpha: 0.1), width: 1),
           ),
         ),
 
@@ -363,7 +368,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.2),
+                  color: AppColors.primary.withValues(alpha: 0.2),
                   blurRadius: 40,
                   spreadRadius: 10,
                 ),
@@ -447,12 +452,12 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
             height: 16,
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              color: Colors.white.withValues(alpha: 0.05),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               borderRadius: BorderRadius.circular(2),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 0),
                 ),
@@ -470,7 +475,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                         borderRadius: BorderRadius.circular(1),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.6),
+                            color: AppColors.primary.withValues(alpha: 0.6),
                             blurRadius: 15,
                             spreadRadius: 1,
                           ),
@@ -484,7 +489,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                           child: CustomPaint(
                             painter: StripePatternPainter(
                               progress: _progressController.value,
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withValues(alpha: 0.2),
                             ),
                           ),
                         ),
@@ -492,8 +497,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
                     ),
                     // Leading white beam
                     Positioned(
-                      left:
-                          (constraints.maxWidth * _progressController.value) -
+                      left: (constraints.maxWidth * _progressController.value) -
                           2,
                       width: 2,
                       top: 0,
@@ -548,8 +552,9 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.backgroundDark.withOpacity(0.8),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
+        color: AppColors.backgroundDark.withValues(alpha: 0.8),
+        border: Border(
+            top: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
       ),
       child: Column(
         children: [
@@ -583,7 +588,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen>
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.05),
+            color: Colors.white.withValues(alpha: 0.05),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: AppColors.primary, size: 20),
@@ -622,7 +627,7 @@ class _BackgroundEffects extends StatelessWidget {
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: [
-                  Colors.indigo.shade900.withOpacity(0.2),
+                  Colors.indigo.shade900.withValues(alpha: 0.2),
                   Colors.transparent,
                 ],
                 stops: const [0.0, 0.7],
@@ -647,7 +652,7 @@ class ScanlinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.primary.withOpacity(0.1)
+      ..color = AppColors.primary.withValues(alpha: 0.1)
       ..strokeWidth = 1;
 
     for (double i = 0; i < size.height; i += 4) {

@@ -181,22 +181,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
-                          child:
-                              Container(
-                                    width: 4,
-                                    height: 8,
-                                    decoration: const BoxDecoration(
-                                      color: AppColors.primary,
-                                      shape: BoxShape.circle,
-                                    ),
-                                  )
-                                  .animate(onPlay: (c) => c.repeat())
-                                  .moveY(
-                                    begin: -5,
-                                    end: 5,
-                                    duration: 1.5.seconds,
-                                    curve: Curves.easeInOut,
-                                  ),
+                          child: Container(
+                            width: 4,
+                            height: 8,
+                            decoration: const BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                          ).animate(onPlay: (c) => c.repeat()).moveY(
+                                begin: -5,
+                                end: 5,
+                                duration: 1.5.seconds,
+                                curve: Curves.easeInOut,
+                              ),
                         ),
                       ),
                     ],
@@ -232,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.4),
+                          color: AppColors.primary.withValues(alpha: 0.4),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),

@@ -18,7 +18,7 @@ class BackgroundLayers extends StatelessWidget {
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001) // perspective
                 ..rotateX(0.2) // 10deg roughly
-                ..scale(1.5),
+                ..scale(1.5, 1.5, 1.5),
               child: CustomPaint(painter: GridPainter()),
             ),
           ),
@@ -31,31 +31,30 @@ class BackgroundLayers extends StatelessWidget {
           left: -100,
           width: 800,
           height: 800,
-          child:
-              Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primary.withOpacity(0.05),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(
-                            alpha: 0.05,
-                          ), // Very low alpha
-                          blurRadius: 20,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                  )
-                  .animate(
-                    onPlay: (controller) => controller.repeat(reverse: true),
-                  )
-                  .scale(
-                    begin: const Offset(1, 1),
-                    end: const Offset(1.2, 1.2),
-                    duration: 4.seconds,
-                    curve: Curves.easeInOut,
-                  ),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.primary.withValues(alpha: 0.05),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(
+                    alpha: 0.05,
+                  ), // Very low alpha
+                  blurRadius: 20,
+                  spreadRadius: 0,
+                ),
+              ],
+            ),
+          )
+              .animate(
+                onPlay: (controller) => controller.repeat(reverse: true),
+              )
+              .scale(
+                begin: const Offset(1, 1),
+                end: const Offset(1.2, 1.2),
+                duration: 4.seconds,
+                curve: Curves.easeInOut,
+              ),
         ),
 
         // Bottom Right
@@ -64,32 +63,31 @@ class BackgroundLayers extends StatelessWidget {
           right: -100,
           width: 600,
           height: 600,
-          child:
-              Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue.withOpacity(0.08),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blue.withValues(
-                            alpha: 0.05,
-                          ), // Very low alpha
-                          blurRadius: 20,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                  )
-                  .animate(
-                    delay: 1.seconds,
-                    onPlay: (controller) => controller.repeat(reverse: true),
-                  )
-                  .scale(
-                    begin: const Offset(1, 1),
-                    end: const Offset(1.3, 1.3),
-                    duration: 5.seconds,
-                    curve: Curves.easeInOut,
-                  ),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blue.withValues(alpha: 0.08),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blue.withValues(
+                    alpha: 0.05,
+                  ), // Very low alpha
+                  blurRadius: 20,
+                  spreadRadius: 0,
+                ),
+              ],
+            ),
+          )
+              .animate(
+                delay: 1.seconds,
+                onPlay: (controller) => controller.repeat(reverse: true),
+              )
+              .scale(
+                begin: const Offset(1, 1),
+                end: const Offset(1.3, 1.3),
+                duration: 5.seconds,
+                curve: Curves.easeInOut,
+              ),
         ),
 
         // Bottom Gradient Overlay (to fade out grid at bottom)
@@ -117,7 +115,7 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.05)
+      ..color = Colors.white.withValues(alpha: 0.05)
       ..strokeWidth = 1;
 
     const double spacing = 60.0;

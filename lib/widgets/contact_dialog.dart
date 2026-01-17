@@ -33,12 +33,12 @@ class _ContactFormContent extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(
               0xFF05070a,
-            ).withOpacity(0.95), // Deep dark background
+            ).withValues(alpha: 0.95), // Deep dark background
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.white.withOpacity(0.08)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 blurRadius: 40,
                 spreadRadius: -10,
               ),
@@ -163,7 +163,7 @@ class _InputField extends StatelessWidget {
           label,
           style: GoogleFonts.spaceMono(
             fontSize: 10,
-            color: AppColors.primary.withOpacity(0.5),
+            color: AppColors.primary.withValues(alpha: 0.5),
             letterSpacing: 2,
             fontWeight: FontWeight.w600,
           ),
@@ -173,7 +173,7 @@ class _InputField extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.1)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
           ),
           child: TextField(
             maxLines: maxLines,
@@ -181,7 +181,7 @@ class _InputField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: GoogleFonts.spaceGrotesk(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 fontSize: 14,
               ),
               border: InputBorder.none,
@@ -219,9 +219,9 @@ class _CircleActionState extends State<_CircleAction> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: _isHovered
-              ? Colors.white.withOpacity(0.1)
-              : Colors.white.withOpacity(0.05),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+              ? Colors.white.withValues(alpha: 0.1)
+              : Colors.white.withValues(alpha: 0.05),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
         ),
         child: Icon(widget.icon, color: Colors.white70, size: 18),
       ),
@@ -248,14 +248,14 @@ class _SubmitButtonState extends State<_SubmitButton> {
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
         decoration: BoxDecoration(
           color: _isHovered
-              ? AppColors.primary.withOpacity(0.1)
+              ? AppColors.primary.withValues(alpha: 0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.primary),
           boxShadow: _isHovered
               ? [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.2),
+                    color: AppColors.primary.withValues(alpha: 0.2),
                     blurRadius: 20,
                   ),
                 ]

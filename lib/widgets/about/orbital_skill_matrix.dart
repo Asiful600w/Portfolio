@@ -414,12 +414,12 @@ class _PlanetInfoBox extends StatelessWidget {
       width: 300,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.9),
-        border: Border.all(color: planet.color.withOpacity(0.5)),
+        color: Colors.black.withValues(alpha: 0.9),
+        border: Border.all(color: planet.color.withValues(alpha: 0.5)),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: planet.color.withOpacity(0.2),
+            color: planet.color.withValues(alpha: 0.2),
             blurRadius: 40,
             spreadRadius: -5,
           ),
@@ -444,7 +444,7 @@ class _PlanetInfoBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Container(height: 1, color: Colors.white.withOpacity(0.1)),
+          Container(height: 1, color: Colors.white.withValues(alpha: 0.1)),
           const SizedBox(height: 12),
           Text(
             planet.description,
@@ -521,7 +521,7 @@ class _OrbitRing extends StatelessWidget {
                       child: CustomPaint(
                         size: Size(size, size * yScale),
                         painter: _EllipseRingPainter(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withValues(alpha: 0.3),
                         ),
                       ),
                     ),
@@ -556,7 +556,7 @@ class _OrbitRing extends StatelessWidget {
 
                       bool shouldRender =
                           (layer == OrbitLayer.background && isBack) ||
-                          (layer == OrbitLayer.foreground && !isBack);
+                              (layer == OrbitLayer.foreground && !isBack);
 
                       if (!shouldRender) {
                         return const SizedBox.shrink();
@@ -577,7 +577,7 @@ class _OrbitRing extends StatelessWidget {
                             width: isActive ? 100 : 60,
                             height: isActive ? 100 : 60,
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.8),
+                              color: Colors.black.withValues(alpha: 0.8),
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: isActive ? Colors.white : planet.color,
@@ -585,8 +585,8 @@ class _OrbitRing extends StatelessWidget {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: planet.color.withOpacity(
-                                    isActive ? 0.6 : 0.3,
+                                  color: planet.color.withValues(
+                                    alpha: isActive ? 0.6 : 0.3,
                                   ),
                                   blurRadius: blur,
                                   spreadRadius: spread,
@@ -657,21 +657,20 @@ class _EllipseRingPainter extends CustomPainter {
 
 class _GlassPanel extends StatelessWidget {
   final Widget child;
-  final EdgeInsetsGeometry padding;
 
-  const _GlassPanel({required this.child, this.padding = EdgeInsets.zero});
+  const _GlassPanel({required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding,
+      padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(10, 10, 15, 0.7),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 15,
             spreadRadius: 0,
           ),
