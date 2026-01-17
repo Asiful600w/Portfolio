@@ -34,8 +34,8 @@ class AboutSection extends StatelessWidget {
           return const Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const _SectionHeader(),
-              const SizedBox(height: 60),
+              _SectionHeader(),
+              SizedBox(height: 60),
               SizedBox(height: 600, child: _TopSection(isDesktop: true)),
               SizedBox(height: 24),
               SizedBox(height: 800, child: OrbitalSkillMatrix()),
@@ -832,10 +832,11 @@ class _RadarChartPainter extends CustomPainter {
       final x = center.dx + r * math.cos(angle);
       final y = center.dy + r * math.sin(angle);
 
-      if (j == 0)
+      if (j == 0) {
         path.moveTo(x, y);
-      else
+      } else {
         path.lineTo(x, y);
+      }
 
       // Draw dots
       canvas.drawCircle(Offset(x, y), 4, Paint()..color = AppColors.primary);
@@ -862,10 +863,10 @@ class _GlassPanel extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color.fromRGBO(10, 10, 15, 0.7),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withOpacity(0.15)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 15,
             spreadRadius: 0,
           ),
@@ -920,10 +921,10 @@ class _SectionHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFF1A1F26),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 blurRadius: 10,
               ),
             ],
@@ -965,7 +966,7 @@ class _SectionHeader extends StatelessWidget {
                   color: AppColors.primary,
                   shadows: [
                     Shadow(
-                      color: AppColors.primary.withOpacity(0.5),
+                      color: AppColors.primary.withValues(alpha: 0.5),
                       blurRadius: 20,
                     ),
                   ],

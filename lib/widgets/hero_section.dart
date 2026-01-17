@@ -420,7 +420,7 @@ class _HeroVisuals extends StatelessWidget {
             child: _AbstractShard(
               width: 300,
               height: 80,
-              color: Colors.blueAccent.withOpacity(0.2),
+              color: Colors.blueAccent.withValues(alpha: 0.2),
               rotate: 45,
               offset: const Offset(-20, -100),
             ),
@@ -455,7 +455,7 @@ class _HeroVisuals extends StatelessWidget {
             child: _AbstractShard(
               width: 250,
               height: 70,
-              color: Colors.cyanAccent.withOpacity(0.2),
+              color: Colors.cyanAccent.withValues(alpha: 0.2),
               rotate: 45,
               offset: const Offset(0, 100),
             ),

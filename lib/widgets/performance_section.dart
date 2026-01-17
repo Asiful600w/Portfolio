@@ -63,7 +63,7 @@ class _SectionHeader extends StatelessWidget {
             Container(
               width: 32,
               height: 1,
-              color: AppColors.primary.withOpacity(0.5),
+              color: AppColors.primary.withValues(alpha: 0.5),
             ),
             const SizedBox(width: 12),
             Text(
@@ -114,12 +114,12 @@ class _GlassPanel extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: const Color(0xFF0F1419).withOpacity(0.65),
-        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        color: const Color(0xFF0F1419).withValues(alpha: 0.65),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -168,9 +168,9 @@ class _CodeEditorState extends State<_CodeEditor> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               border: Border(
-                bottom: BorderSide(color: Colors.white.withOpacity(0.05)),
+                bottom: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
               ),
             ),
             child: Row(
@@ -197,13 +197,13 @@ class _CodeEditorState extends State<_CodeEditor> {
                 Row(
                   children: [
                     Container(
-                          width: 6,
-                          height: 6,
-                          decoration: const BoxDecoration(
-                            color: Colors.greenAccent,
-                            shape: BoxShape.circle,
-                          ),
-                        )
+                      width: 6,
+                      height: 6,
+                      decoration: const BoxDecoration(
+                        color: Colors.greenAccent,
+                        shape: BoxShape.circle,
+                      ),
+                    )
                         .animate(onPlay: (c) => c.repeat(reverse: true))
                         .fadeIn(duration: 600.ms),
                     const SizedBox(width: 6),
@@ -227,7 +227,7 @@ class _CodeEditorState extends State<_CodeEditor> {
             height: 400,
             width: double.infinity,
             padding: const EdgeInsets.all(24),
-            color: const Color(0xFF090B10).withOpacity(0.8),
+            color: const Color(0xFF090B10).withValues(alpha: 0.8),
             child: SingleChildScrollView(
               controller: _scrollController,
               child: RichText(
@@ -350,10 +350,10 @@ class _CodeEditorState extends State<_CodeEditor> {
   }
 
   Widget _windowControl(Color color) => Container(
-    width: 10,
-    height: 10,
-    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-  );
+        width: 10,
+        height: 10,
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      );
 }
 
 class _BlinkingCursor extends StatefulWidget {
@@ -447,7 +447,7 @@ class _PerformanceMonitorState extends State<_PerformanceMonitor> {
                   Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -529,9 +529,10 @@ class _PerformanceMonitorState extends State<_PerformanceMonitor> {
                 height: 180,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.white.withOpacity(0.05)),
+                  border:
+                      Border.all(color: Colors.white.withValues(alpha: 0.05)),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
@@ -583,27 +584,27 @@ class _PerformanceMonitorState extends State<_PerformanceMonitor> {
   }
 
   Widget _legendItem(Color color, String label) => Row(
-    children: [
-      Container(
-        width: 8,
-        height: 8,
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.2),
-          border: Border.all(color: color),
-          borderRadius: BorderRadius.circular(2),
-        ),
-      ),
-      const SizedBox(width: 6),
-      Text(
-        label,
-        style: GoogleFonts.getFont(
-          'JetBrains Mono',
-          fontSize: 10,
-          color: Colors.grey[500],
-        ),
-      ),
-    ],
-  );
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.2),
+              border: Border.all(color: color),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: GoogleFonts.getFont(
+              'JetBrains Mono',
+              fontSize: 10,
+              color: Colors.grey[500],
+            ),
+          ),
+        ],
+      );
 }
 
 class _SegmentBtn extends StatelessWidget {
@@ -625,7 +626,7 @@ class _SegmentBtn extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.primary.withOpacity(0.15)
+              ? AppColors.primary.withValues(alpha: 0.15)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
         ),
@@ -671,7 +672,7 @@ class _MetricCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: tagColor.withOpacity(0.1),
+                  color: tagColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -763,7 +764,7 @@ class _FpsGraphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // Grid Lines
     final gridPaint = Paint()
-      ..color = Colors.white.withOpacity(0.05)
+      ..color = Colors.white.withValues(alpha: 0.05)
       ..strokeWidth = 1;
 
     canvas.drawLine(
@@ -798,18 +799,15 @@ class _FpsGraphPainter extends CustomPainter {
 
       if (selection == 0) {
         // iOS: Smooth, stable sine wave
-        y +=
-            (math.sin(waveX) * height * 0.2) +
+        y += (math.sin(waveX) * height * 0.2) +
             (math.sin(waveX * 2) * height * 0.1);
       } else if (selection == 1) {
         // Android: More complex, higher frequency
-        y +=
-            (math.sin(waveX * 1.5) * height * 0.15) +
+        y += (math.sin(waveX * 1.5) * height * 0.15) +
             (math.cos(waveX * 2.5) * height * 0.15);
       } else {
         // Web: Flatter, "60fps" feel
-        y +=
-            (math.sin(waveX * 0.8) * height * 0.1) +
+        y += (math.sin(waveX * 0.8) * height * 0.1) +
             (math.sin(waveX * 3) * height * 0.05);
       }
 
@@ -824,7 +822,7 @@ class _FpsGraphPainter extends CustomPainter {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.primary.withOpacity(0.3),
+        AppColors.primary.withValues(alpha: 0.3),
         AppColors.primary.withOpacity(0.0),
       ],
     );
@@ -843,22 +841,20 @@ class _FpsGraphPainter extends CustomPainter {
 
       double y = height * 0.6;
       if (selection == 0) {
-        y +=
-            (math.sin(waveX) * height * 0.2) +
+        y += (math.sin(waveX) * height * 0.2) +
             (math.sin(waveX * 2) * height * 0.1);
       } else if (selection == 1) {
-        y +=
-            (math.sin(waveX * 1.5) * height * 0.15) +
+        y += (math.sin(waveX * 1.5) * height * 0.15) +
             (math.cos(waveX * 2.5) * height * 0.15);
       } else {
-        y +=
-            (math.sin(waveX * 0.8) * height * 0.1) +
+        y += (math.sin(waveX * 0.8) * height * 0.1) +
             (math.sin(waveX * 3) * height * 0.05);
       }
-      if (x == 0)
+      if (x == 0) {
         strokePath.moveTo(x, y);
-      else
+      } else {
         strokePath.lineTo(x, y);
+      }
     }
 
     final strokePaint = Paint()
@@ -934,7 +930,7 @@ class _TechItem extends StatelessWidget {
           label,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white.withValues(alpha: 0.8),
             fontSize: 13,
           ),
         ),
