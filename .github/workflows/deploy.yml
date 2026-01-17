@@ -27,7 +27,7 @@ jobs:
         run: flutter analyze
 
       - name: Build Web Application
-        run: flutter build web --release --base-href "/portfolio/" 
+        run: flutter build web --release --base-href "/Portfolio/" 
         # IMPORTANT: Replace '/portfolio_hero/' with '/<repository-name>/' if your repo name is different.
         # If deploying to a custom domain (e.g. user.github.io), remove the --base-href argument or set it to "/"
 
