@@ -38,6 +38,7 @@ dependencies:
   flutter_animate: ^4.5.2
   url_launcher: ^6.3.2
   visibility_detector: ^0.4.0+2
+  supabase_flutter: ^2.12.0
 
 dev_dependencies:
   flutter_test:

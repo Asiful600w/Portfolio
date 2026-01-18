@@ -20,20 +20,20 @@ class FooterSection extends StatelessWidget {
           // 2. Content
           Column(
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 60),
               // Header & Input Console
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: _TopSection(),
               ),
 
-              const SizedBox(height: 80),
+              const SizedBox(height: 40),
 
               const Divider(color: Colors.white10, height: 1),
 
               // Grid Info (System, Nav, Socials)
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 60),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
                 child: _InfoGrid(),
               ),
 
@@ -47,8 +47,31 @@ class FooterSection extends StatelessWidget {
   }
 }
 
-class _NeuralBackground extends StatelessWidget {
+class _NeuralBackground extends StatefulWidget {
   const _NeuralBackground();
+
+  @override
+  State<_NeuralBackground> createState() => _NeuralBackgroundState();
+}
+
+class _NeuralBackgroundState extends State<_NeuralBackground>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +87,16 @@ class _NeuralBackground extends StatelessWidget {
             ),
           ),
           // Curves
-          Positioned.fill(child: CustomPaint(painter: _CurvePainter())),
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return CustomPaint(
+                  painter: _CurvePainter(progress: _controller.value),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -92,15 +124,14 @@ class _DotPatternPainter extends CustomPainter {
 }
 
 class _CurvePainter extends CustomPainter {
+  final double progress;
+
+  _CurvePainter({required this.progress});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint1 = Paint()
       ..color = AppColors.primary.withValues(alpha: 0.1)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
-
-    final paint2 = Paint()
-      ..color = const Color(0xFF8F27E6).withValues(alpha: 0.1) // Accent Violet
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
@@ -119,27 +150,40 @@ class _CurvePainter extends CustomPainter {
       size.height * 0.3,
     );
 
-    final path2 = Path();
-    path2.moveTo(0, size.height * 0.5);
-    path2.quadraticBezierTo(
-      size.width * 0.3,
-      size.height * 0.4,
-      size.width * 0.6,
-      size.height * 0.6,
-    );
-    path2.quadraticBezierTo(
-      size.width * 0.8,
-      size.height * 0.7,
-      size.width,
-      size.height * 0.6,
-    );
-
     canvas.drawPath(path1, paint1);
-    canvas.drawPath(path2, paint2);
+
+    // Laser Effect (Glowing Ball)
+    final ballPaint = Paint()
+      ..color = AppColors.primary
+      ..style = PaintingStyle.fill
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+
+    final corePaint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+
+    void drawLaserBall(Path path) {
+      final pms = path.computeMetrics();
+      for (final pm in pms) {
+        final length = pm.length;
+        final dist = length * progress;
+        final tangent = pm.getTangentForOffset(dist);
+
+        if (tangent != null) {
+          // Glow
+          canvas.drawCircle(tangent.position, 6, ballPaint);
+          // Core
+          canvas.drawCircle(tangent.position, 2, corePaint);
+        }
+      }
+    }
+
+    drawLaserBall(path1);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _CurvePainter oldDelegate) =>
+      oldDelegate.progress != progress;
 }
 
 class _TopSection extends StatelessWidget {
@@ -598,7 +642,7 @@ class _BottomStatusBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Colors.white.withValues(alpha: 0.02),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1400),

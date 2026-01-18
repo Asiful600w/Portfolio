@@ -5,69 +5,99 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../utils/styles.dart';
 import 'about/orbital_skill_matrix.dart';
+import '../services/supabase_service.dart';
+import '../models/profile_model.dart';
 
-class AboutSection extends StatelessWidget {
+class AboutSection extends StatefulWidget {
   const AboutSection({super.key});
 
   @override
+  State<AboutSection> createState() => _AboutSectionState();
+}
+
+class _AboutSectionState extends State<AboutSection> {
+  final _supabaseService = SupabaseService();
+  late Future<ProfileModel?> _profileFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileFuture = _supabaseService.getProfile();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 1400),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final isDesktop = constraints.maxWidth > 1024;
+    return FutureBuilder<ProfileModel?>(
+      future: _profileFuture,
+      builder: (context, snapshot) {
+        final profile = snapshot.data;
 
-          if (!isDesktop) {
-            return const Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _SectionHeader(),
-                SizedBox(height: 48),
-                _TopSection(isDesktop: false),
-                SizedBox(height: 48),
-                _MobileSkillMatrix(),
-              ],
-            );
-          }
+        return Container(
+          constraints: const BoxConstraints(maxWidth: 1400),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isDesktop = constraints.maxWidth > 1024;
 
-          return const Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _SectionHeader(),
-              SizedBox(height: 60),
-              SizedBox(height: 600, child: _TopSection(isDesktop: true)),
-              SizedBox(height: 24),
-              SizedBox(height: 800, child: OrbitalSkillMatrix()),
-            ],
-          );
-        },
-      ),
+              if (!isDesktop) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const _SectionHeader(),
+                    const SizedBox(height: 48),
+                    _TopSection(isDesktop: false, profile: profile),
+                    const SizedBox(height: 48),
+                    const _MobileSkillMatrix(),
+                  ],
+                );
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const _SectionHeader(),
+                  const SizedBox(height: 60),
+                  SizedBox(
+                      height: 600,
+                      child: _TopSection(isDesktop: true, profile: profile)),
+                  const SizedBox(height: 24),
+                  const SizedBox(height: 800, child: OrbitalSkillMatrix()),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
 
 class _TopSection extends StatelessWidget {
   final bool isDesktop;
-  const _TopSection({required this.isDesktop});
+  final ProfileModel? profile;
+
+  const _TopSection({
+    required this.isDesktop,
+    this.profile,
+  });
 
   @override
   Widget build(BuildContext context) {
     if (isDesktop) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          Expanded(flex: 4, child: _ProfileCard()),
-          SizedBox(width: 24),
-          Expanded(flex: 8, child: _BioCard(isDesktop: true)),
+        children: [
+          Expanded(flex: 4, child: _ProfileCard(profile: profile)),
+          const SizedBox(width: 24),
+          Expanded(flex: 8, child: _BioCard(isDesktop: true, profile: profile)),
         ],
       );
     } else {
       return Column(
-        children: const [
-          _ProfileCard(),
-          SizedBox(height: 24),
-          _BioCard(isDesktop: false),
+        children: [
+          _ProfileCard(profile: profile),
+          const SizedBox(height: 24),
+          _BioCard(isDesktop: false, profile: profile),
         ],
       );
     }
@@ -78,7 +108,8 @@ class _TopSection extends StatelessWidget {
 // 1. Profile Card
 // -----------------------------------------------------------------------------
 class _ProfileCard extends StatelessWidget {
-  const _ProfileCard();
+  final ProfileModel? profile;
+  const _ProfileCard({this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -173,9 +204,20 @@ class _ProfileCard extends StatelessWidget {
                         ],
                       ),
                       child: ClipOval(
-                        child: Image.asset(
-                          "assets/images/profile.png",
-                          fit: BoxFit.cover,
+                        child: ClipOval(
+                          child: profile?.profileImageUrl != null
+                              ? Image.network(
+                                  profile!.profileImageUrl!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (c, e, s) => Image.asset(
+                                    "assets/images/profile.png",
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Image.asset(
+                                  "assets/images/profile.png",
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                     ),
@@ -234,7 +276,7 @@ class _ProfileCard extends StatelessWidget {
               const SizedBox(height: 32),
 
               Text(
-                "ASIFUL ISLAM",
+                profile?.fullName ?? "ASIFUL ISLAM",
                 style: AppTextStyles.heroTitle.copyWith(
                   fontSize: 32,
                   letterSpacing: -1,
@@ -256,7 +298,7 @@ class _ProfileCard extends StatelessWidget {
                       .fadeIn(duration: 500.ms),
                   const SizedBox(width: 8),
                   Text(
-                    "ONLINE_",
+                    profile?.status ?? "ONLINE_",
                     style: GoogleFonts.spaceMono(
                       fontSize: 12,
                       color: AppColors.primary,
@@ -278,7 +320,8 @@ class _ProfileCard extends StatelessWidget {
 // -----------------------------------------------------------------------------
 class _BioCard extends StatefulWidget {
   final bool isDesktop;
-  const _BioCard({required this.isDesktop});
+  final ProfileModel? profile;
+  const _BioCard({required this.isDesktop, this.profile});
 
   @override
   State<_BioCard> createState() => _BioCardState();
@@ -359,9 +402,8 @@ class _BioCardState extends State<_BioCard> {
                       height: 0.9,
                     ),
                     children: [
-                      const TextSpan(text: "Digital_\n"),
                       TextSpan(
-                        text: "Architect",
+                        text: widget.profile?.title ?? "Architect",
                         style: TextStyle(
                           color: Colors.transparent,
                           shadows: [
@@ -398,17 +440,17 @@ class _BioCardState extends State<_BioCard> {
                             fontSize: 18,
                             color: Colors.grey[400],
                           ),
-                          children: const [
+                          children: [
                             TextSpan(text: "Initializing "),
                             TextSpan(
-                              text: "Flutter Engine",
+                              text: "Flutter Engine ",
                               style: TextStyle(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             TextSpan(
-                              text:
+                              text: widget.profile?.bio ??
                                   "... I construct immersive digital ecosystems where performance meets aesthetic precision.",
                             ),
                           ],
@@ -452,7 +494,7 @@ class _BioCardState extends State<_BioCard> {
                   children: [
                     _Tag(
                       icon: Icons.location_on,
-                      text: "DHAKA, BD",
+                      text: widget.profile?.location ?? "DHAKA, BD",
                       padding: widget.isDesktop
                           ? const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -466,7 +508,7 @@ class _BioCardState extends State<_BioCard> {
                     ),
                     _Tag(
                       icon: Icons.code,
-                      text: "Open Source",
+                      text: widget.profile?.tagLine ?? "Open Source",
                       padding: widget.isDesktop
                           ? const EdgeInsets.symmetric(
                               horizontal: 12,
