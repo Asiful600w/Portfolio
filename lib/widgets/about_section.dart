@@ -130,147 +130,154 @@ class _ProfileCard extends StatelessWidget {
               SizedBox(
                 width: 320,
                 height: 320,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Outer Ring
-                    Container(
-                      width: 320,
-                      height: 320,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.2),
-                          width: 1,
-                        ),
-                      ),
-                    )
-                        .animate(onPlay: (c) => c.repeat())
-                        .rotate(duration: 15.seconds),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SizedBox(
+                    width: 320,
+                    height: 320,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Outer Ring
+                        Container(
+                          width: 320,
+                          height: 320,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.primary.withValues(alpha: 0.2),
+                              width: 1,
+                            ),
+                          ),
+                        )
+                            .animate(onPlay: (c) => c.repeat())
+                            .rotate(duration: 15.seconds),
 
-                    // Rotating Dot Container
-                    SizedBox(
-                      width: 320,
-                      height: 320,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          width: 8,
-                          height: 8,
-                          margin: const EdgeInsets.only(top: 0),
+                        // Rotating Dot Container
+                        SizedBox(
+                          width: 320,
+                          height: 320,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              margin: const EdgeInsets.only(top: 0),
+                              decoration: const BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.primary,
+                                    blurRadius: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                            .animate(onPlay: (c) => c.repeat())
+                            .rotate(duration: 15.seconds),
+
+                        // Middle Ring
+                        Container(
+                          width: 280,
+                          height: 280,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.1),
+                              width: 1,
+                            ),
+                          ),
+                        )
+                            .animate(onPlay: (c) => c.repeat(reverse: false))
+                            .rotate(begin: 1, end: 0, duration: 25.seconds),
+
+                        // Profile Picture
+                        Container(
+                          width: 250,
+                          height: 250,
                           decoration: const BoxDecoration(
-                            color: AppColors.primary,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
                                 color: AppColors.primary,
-                                blurRadius: 10,
+                                blurRadius: 50,
+                                spreadRadius: -20,
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    )
-                        .animate(onPlay: (c) => c.repeat())
-                        .rotate(duration: 15.seconds),
-
-                    // Middle Ring
-                    Container(
-                      width: 280,
-                      height: 280,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.1),
-                          width: 1,
-                        ),
-                      ),
-                    )
-                        .animate(onPlay: (c) => c.repeat(reverse: false))
-                        .rotate(begin: 1, end: 0, duration: 25.seconds),
-
-                    // Profile Picture
-                    Container(
-                      width: 250,
-                      height: 250,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primary,
-                            blurRadius: 50,
-                            spreadRadius: -20,
+                          child: ClipOval(
+                            child: ClipOval(
+                              child: profile?.profileImageUrl != null
+                                  ? Image.network(
+                                      profile!.profileImageUrl!,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (c, e, s) => Image.asset(
+                                        "assets/images/profile.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Image.asset(
+                                      "assets/images/profile.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
                           ),
-                        ],
-                      ),
-                      child: ClipOval(
-                        child: ClipOval(
-                          child: profile?.profileImageUrl != null
-                              ? Image.network(
-                                  profile!.profileImageUrl!,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (c, e, s) => Image.asset(
-                                    "assets/images/profile.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Image.asset(
-                                  "assets/images/profile.png",
-                                  fit: BoxFit.cover,
+                        ),
+
+                        // Scanner Text
+                        Container(
+                          width: 260,
+                          height: 260,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.primary.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
                                 ),
-                        ),
-                      ),
+                                color: Colors.black,
+                                child: const Text(
+                                  "SCANNING",
+                                  style: TextStyle(
+                                    fontSize: 8,
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                color: Colors.black,
+                                child: const Text(
+                                  "ID: DEV-01",
+                                  style: TextStyle(
+                                    fontSize: 8,
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(
+                              begin: const Offset(1.1, 1.1),
+                              end: const Offset(1.0, 1.0),
+                              duration: 2.seconds,
+                            ),
+                      ],
                     ),
-
-                    // Scanner Text
-                    Container(
-                      width: 260,
-                      height: 260,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.3),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            color: Colors.black,
-                            child: const Text(
-                              "SCANNING",
-                              style: TextStyle(
-                                fontSize: 8,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            color: Colors.black,
-                            child: const Text(
-                              "ID: DEV-01",
-                              style: TextStyle(
-                                fontSize: 8,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ).animate(onPlay: (c) => c.repeat(reverse: true)).scale(
-                          begin: const Offset(1.1, 1.1),
-                          end: const Offset(1.0, 1.0),
-                          duration: 2.seconds,
-                        ),
-                  ],
+                  ),
                 ),
               ),
               const SizedBox(height: 32),

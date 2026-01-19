@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../utils/styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});
@@ -573,15 +575,15 @@ class _SocialRelay extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            _SocialNode(Icons.public),
+            _SocialNode("assets/svgs/face.svg", "https://www.facebook.com/AsifulIslam112/"),
             SizedBox(width: 16),
-            _SocialNode(Icons.camera_alt),
+            _SocialNode("assets/svgs/ins.svg", "https://www.instagram.com/asiiifff__chow/"),
             SizedBox(width: 16),
-            _SocialNode(Icons.chat_bubble_outline),
+            _SocialNode("assets/svgs/whats.svg", "https://wa.me/+8801521558737"),
             SizedBox(width: 16),
-            _SocialNode(Icons.share),
+            _SocialNode("assets/svgs/link.svg", "https://www.linkedin.com/in/asiful-islam-55a4a6180/"),
             SizedBox(width: 16),
-            _SocialNode(Icons.code),
+            _SocialNode("assets/svgs/git.svg", "https://github.com/Asiful600w/"),
           ],
         ),
       ],
@@ -590,8 +592,9 @@ class _SocialRelay extends StatelessWidget {
 }
 
 class _SocialNode extends StatefulWidget {
-  final IconData icon;
-  const _SocialNode(this.icon);
+  final String assetPath;
+  final String url;
+  const _SocialNode(this.assetPath, this.url);
 
   @override
   State<_SocialNode> createState() => _SocialNodeState();
@@ -605,31 +608,43 @@ class _SocialNodeState extends State<_SocialNode> {
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedContainer(
-        duration: 200.ms,
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            color: _isHovered
-                ? const Color(0xFF8F27E6).withValues(alpha: 0.5)
-                : Colors.white10,
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () async {
+          final uri = Uri.parse(widget.url);
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
+          }
+        },
+        child: AnimatedContainer(
+          duration: 200.ms,
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: _isHovered
+                  ? const Color(0xFF8F27E6).withValues(alpha: 0.5)
+                  : Colors.white10,
+            ),
+            boxShadow: _isHovered
+                ? [
+                    const BoxShadow(
+                      color: Color(0xFF8F27E6),
+                      blurRadius: 15,
+                      spreadRadius: -5,
+                    ),
+                  ]
+                : [],
           ),
-          boxShadow: _isHovered
-              ? [
-                  const BoxShadow(
-                    color: Color(0xFF8F27E6),
-                    blurRadius: 15,
-                    spreadRadius: -5,
-                  ),
-                ]
-              : [],
-        ),
-        child: Icon(
-          widget.icon,
-          size: 16,
-          color: _isHovered ? const Color(0xFF8F27E6) : Colors.white38,
+          padding: const EdgeInsets.all(8),
+          child: SvgPicture.asset(
+            widget.assetPath,
+            colorFilter: ColorFilter.mode(
+              _isHovered ? const Color(0xFF8F27E6) : Colors.white38,
+              BlendMode.srcIn,
+            ),
+          ),
         ),
       ),
     );

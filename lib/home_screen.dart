@@ -8,6 +8,8 @@ import 'widgets/projects_section.dart';
 import 'widgets/footer_section.dart';
 import 'widgets/hero_section.dart';
 import 'widgets/nav_bar.dart';
+import 'widgets/mobile_drawer.dart';
+import 'widgets/contact_dialog.dart';
 import 'utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,7 +58,49 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      endDrawer: const _MobileDrawer(),
+      endDrawer: MobileDrawer(
+        onHomeClick: () {
+          scrollController.animateTo(
+            0,
+            duration: 1.seconds,
+            curve: Curves.easeInOut,
+          );
+        },
+        onProjectsClick: () {
+          if (projectsKey.currentContext != null) {
+            Scrollable.ensureVisible(
+              projectsKey.currentContext!,
+              duration: 1.seconds,
+              curve: Curves.easeInOut,
+            );
+          }
+        },
+        onAboutClick: () {
+          if (aboutKey.currentContext != null) {
+            Scrollable.ensureVisible(
+              aboutKey.currentContext!,
+              duration: 1.seconds,
+              curve: Curves.easeInOut,
+            );
+          }
+        },
+        onServicesClick: () {
+          if (servicesKey.currentContext != null) {
+            Scrollable.ensureVisible(
+              servicesKey.currentContext!,
+              duration: 1.seconds,
+              curve: Curves.easeInOut,
+            );
+          }
+        },
+        onContactClick: () {
+          showDialog(
+            context: context,
+            barrierColor: Colors.black.withValues(alpha: 0.8),
+            builder: (context) => const ContactDialog(),
+          );
+        },
+      ),
       body: Stack(
         children: [
           // 1. Background (Fixed)
@@ -246,44 +290,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _MobileDrawer extends StatelessWidget {
-  const _MobileDrawer();
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: const Color(0xFF101010),
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-        children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          const SizedBox(height: 40),
-          _drawerItem('Home'),
-          _drawerItem('Projects'),
-          _drawerItem('About'),
-          _drawerItem('Resume'),
-        ],
-      ),
-    );
-  }
-
-  Widget _drawerItem(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Text(
-        title,
-        style: AppTextStyles.heroSubtitle.copyWith(fontSize: 24),
       ),
     );
   }

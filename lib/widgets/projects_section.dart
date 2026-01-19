@@ -65,7 +65,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
                 // Carousel
                 SizedBox(
-                  height: 480,
+                  height: MediaQuery.of(context).size.width < 600 ? 560 : 480,
                   child: FutureBuilder<List<ProjectModel>>(
                     future: _projectsFuture,
                     builder: (context, snapshot) {
@@ -149,7 +149,8 @@ class _SectionHeader extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     style: AppTextStyles.heroTitle.copyWith(
-                      fontSize: 48,
+                      fontSize:
+                          MediaQuery.of(context).size.width < 600 ? 36 : 48,
                       height: 1.1,
                     ),
                     children: [

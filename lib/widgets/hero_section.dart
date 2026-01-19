@@ -34,7 +34,7 @@ class HeroSection extends StatelessWidget {
             return Column(
               children: [
                 _HeroTextContent(
-                  centered: true,
+                  centered: false,
                   onProjectsClick: onProjectsClick,
                 ),
               ],
@@ -71,7 +71,10 @@ class _HeroTextContent extends StatelessWidget {
           textAlign: centered ? TextAlign.center : TextAlign.start,
           text: TextSpan(
             style: AppTextStyles.heroTitle.copyWith(
-              fontSize: centered ? 48 : 72,
+              fontSize: MediaQuery.of(context).size.width < 600
+                  ? 40
+                  : (centered ? 48 : 72),
+              height: 1.1,
             ),
             children: const [
               TextSpan(text: "Hello, I'm \n"),
@@ -225,7 +228,7 @@ class _GradientText extends StatelessWidget {
         child: Text(
           text,
           style: AppTextStyles.heroTitle.copyWith(
-            fontSize: 72,
+            fontSize: MediaQuery.of(context).size.width < 600 ? 40 : 72,
             // Note: Shadow doesn't show well with ShaderMask on text in flutter web sometimes,
             // but we try. Usually need a duplicate text stack for shadow.
             color: Colors.white, // required for shader mask
