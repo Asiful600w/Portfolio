@@ -271,8 +271,8 @@ class _MockupCarouselState extends State<_MockupCarousel> {
   @override
   void initState() {
     super.initState();
-    // Center initial page
-    _currentPage = widget.images.length ~/ 2;
+    // Start with the first page
+    _currentPage = 0;
   }
 
   @override
