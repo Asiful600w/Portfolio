@@ -468,32 +468,38 @@ class _MobileCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      controller: PageController(viewportFraction: 0.9),
+      controller: PageController(viewportFraction: 0.85), // similar to desktop
       itemCount: images.length,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: AspectRatio(
+              aspectRatio: 9 / 17.5, // Match desktop aspect ratio
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(20), // Slightly rounded like phone
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.5),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                images[index],
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  color: const Color(0xFF131517),
-                  child: const Center(
-                    child: Icon(Icons.broken_image,
-                        color: Colors.white24, size: 40),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    images[index],
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: const Color(0xFF131517),
+                      child: const Center(
+                        child: Icon(Icons.broken_image,
+                            color: Colors.white24, size: 40),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -1264,63 +1270,76 @@ class _ChallengesSection extends StatelessWidget {
       children: [
         _SectionTitle(icon: Icons.warning_amber, title: "CHALLENGES"),
         const SizedBox(height: 32),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.8, // Increased to reduce height
-            crossAxisSpacing: 24,
-            mainAxisSpacing: 16,
-          ),
-          itemCount: challenges.length,
-          itemBuilder: (context, index) {
-            final item = challenges[index] as Map<String, dynamic>;
-            final IconData icon =
-                item['icon'] is IconData ? item['icon'] : Icons.bolt;
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final isMobile = constraints.maxWidth < 600;
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isMobile ? 1 : 2,
+                childAspectRatio: isMobile ? 2.5 : 1.8,
+                crossAxisSpacing: 24,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: challenges.length,
+              itemBuilder: (context, index) {
+                final item = challenges[index] as Map<String, dynamic>;
+                final IconData icon =
+                    item['icon'] is IconData ? item['icon'] : Icons.bolt;
 
-            return Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.05),
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Icon(icon, color: AppColors.primary, size: 20),
+                return Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(16),
+                    border:
+                        Border.all(color: Colors.white.withValues(alpha: 0.05)),
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    item['title'] ?? "Challenge",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.05),
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: Icon(icon, color: AppColors.primary, size: 20),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              item['title'] ?? "Challenge",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              item['description'] ?? "",
+                              style: TextStyle(
+                                fontSize: 13, // Slightly smaller
+                                color: Colors.grey[500],
+                                height: 1.4,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    item['description'] ?? "",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[500],
-                      height: 1.5,
-                    ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
+                );
+              },
             );
           },
         ),
