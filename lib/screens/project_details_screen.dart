@@ -306,6 +306,7 @@ class _MockupCarouselState extends State<_MockupCarousel> {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 40),
         child: PageView.builder(
+          clipBehavior: Clip.none,
           controller: _controller,
           itemCount: widget.images.length,
           onPageChanged: (int page) {
