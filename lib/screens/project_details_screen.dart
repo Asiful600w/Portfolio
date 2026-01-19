@@ -377,30 +377,6 @@ class _PhoneMockup extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         // Glow Effect (Only for focused)
-        if (isFocused)
-          Positioned(
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent, // Fix for web rendering
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        AppColors.primary.withValues(alpha: 0.4), // Subtle glow
-                    blurRadius: 60,
-                    spreadRadius: -20,
-                  ),
-                ],
-              ),
-            ),
-          )
-              .animate()
-              .animate(onPlay: (c) => c.repeat(reverse: true))
-              .fade(begin: 0.5, end: 0.8, duration: 2.seconds),
 
         // Phone Frame
         AspectRatio(
@@ -470,7 +446,9 @@ class _PhoneMockup extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )
+            .animate(target: isFocused ? 1 : 0)
+            .scaleXY(end: 1.05, duration: 300.ms),
       ],
     );
   }
