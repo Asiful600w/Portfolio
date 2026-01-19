@@ -385,6 +385,7 @@ class _PhoneMockup extends StatelessWidget {
             right: 20,
             child: Container(
               decoration: BoxDecoration(
+                color: Colors.transparent, // Fix for web rendering
                 borderRadius: BorderRadius.circular(40),
                 boxShadow: [
                   BoxShadow(
