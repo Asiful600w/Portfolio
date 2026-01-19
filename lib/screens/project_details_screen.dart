@@ -11,6 +11,27 @@ class ProjectDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 800) {
+          return _MobileProjectDetails(project: project);
+        } else if (constraints.maxWidth < 1100) {
+          return _TabletProjectDetails(project: project);
+        } else {
+          return _DesktopProjectDetails(project: project);
+        }
+      },
+    );
+  }
+}
+
+class _DesktopProjectDetails extends StatelessWidget {
+  final ProjectModel project;
+
+  const _DesktopProjectDetails({required this.project});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundDark,
       body: Stack(
@@ -187,6 +208,299 @@ class ProjectDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _MobileProjectDetails extends StatelessWidget {
+  final ProjectModel project;
+
+  const _MobileProjectDetails({required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.backgroundDark,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: CustomPaint(
+              painter: _GridPainter(),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      _BackButton(),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "PROJECT CASE STUDY",
+                        style: GoogleFonts.spaceMono(
+                          color: AppColors.primary,
+                          fontSize: 10,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        project.title,
+                        style: AppTextStyles.heroTitle.copyWith(fontSize: 40),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        project.subtitle ?? "Case Study",
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 14,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+                SizedBox(
+                  height: 400,
+                  child: _MobileCarousel(
+                    images: project.galleryImages.isNotEmpty
+                        ? project.galleryImages
+                        : const [
+                            "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+                            "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+                            "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&q=80",
+                            "https://images.unsplash.com/photo-1596742578443-7682e525c489?w=800&q=80",
+                            "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=800&q=80",
+                          ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ObjectiveSection(
+                        objective: project.objective,
+                        features: project.features,
+                        architecture: project.architecture,
+                      ),
+                      const SizedBox(height: 40),
+                      _SpecsPanel(project: project),
+                      const SizedBox(height: 40),
+                      _SectionTitle(
+                          icon: Icons.text_snippet, title: "DESCRIPTION"),
+                      const SizedBox(height: 16),
+                      Text(
+                        project.description ??
+                            project.subtitle ??
+                            "A complex distributed system.",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[400],
+                          height: 1.6,
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      _ChallengesSection(
+                        challenges: (project.challenges != null &&
+                                project.challenges!.isNotEmpty)
+                            ? project.challenges!
+                            : [
+                                {
+                                  "title": "Real-time Data",
+                                  "description":
+                                      "Handling high-frequency updates.",
+                                  "icon": Icons.flash_on,
+                                },
+                              ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 60),
+                Center(
+                  child: Text(
+                    "© 2026 ASIFUL ISLAM",
+                    style: GoogleFonts.spaceMono(
+                      fontSize: 10,
+                      color: Colors.grey[700],
+                      letterSpacing: 2,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TabletProjectDetails extends StatelessWidget {
+  final ProjectModel project;
+
+  const _TabletProjectDetails({required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.backgroundDark,
+      body: Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: _GridPainter())),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Row(
+                    children: [
+                      _BackButton(),
+                      const Spacer(),
+                      _ProjectHeader(
+                        title: project.title,
+                        subtitle: project.subtitle ?? "Case Study",
+                      ),
+                      const Spacer(),
+                      const SizedBox(width: 48),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 60),
+                SizedBox(
+                  height: 500,
+                  child: _MockupCarousel(
+                    images: project.galleryImages.isNotEmpty
+                        ? project.galleryImages
+                        : const [
+                            "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+                            "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+                            "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&q=80",
+                            "https://images.unsplash.com/photo-1596742578443-7682e525c489?w=800&q=80",
+                            "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=800&q=80",
+                          ],
+                  ),
+                ),
+                const SizedBox(height: 60),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ObjectiveSection(
+                        objective: project.objective,
+                        features: project.features,
+                        architecture: project.architecture,
+                      ),
+                      const SizedBox(height: 40),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              flex: 3, child: _SpecsPanel(project: project)),
+                          const SizedBox(width: 32),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _SectionTitle(
+                                    icon: Icons.text_snippet,
+                                    title: "DESCRIPTION"),
+                                const SizedBox(height: 16),
+                                Text(
+                                  project.description ??
+                                      project.subtitle ??
+                                      "Description...",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey[400],
+                                    height: 1.6,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 48),
+                      _ChallengesSection(
+                        challenges: (project.challenges != null &&
+                                project.challenges!.isNotEmpty)
+                            ? project.challenges!
+                            : [],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 60),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MobileCarousel extends StatelessWidget {
+  final List<String> images;
+  const _MobileCarousel({required this.images});
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      controller: PageController(viewportFraction: 0.9),
+      itemCount: images.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.5),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                images[index],
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  color: const Color(0xFF131517),
+                  child: const Center(
+                    child: Icon(Icons.broken_image,
+                        color: Colors.white24, size: 40),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
