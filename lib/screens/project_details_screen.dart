@@ -55,6 +55,8 @@ class ProjectDetailsScreen extends StatelessWidget {
                             "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
                             "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
                             "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&q=80",
+                            "https://images.unsplash.com/photo-1596742578443-7682e525c489?w=800&q=80",
+                            "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?w=800&q=80",
                           ],
                   ),
                 ),
@@ -289,8 +291,8 @@ class _MockupCarouselState extends State<_MockupCarousel> {
       if (screenWidth == 0) screenWidth = 1000; // Protection
 
       // Calculate desired viewport fraction to keep items compact
-      // Target slot width ~ 320px (Phone width ~267px + margins)
-      double fraction = (320.0 / screenWidth).clamp(0.2, 0.85);
+      // Target slot width ~ 260px (Phone width ~267px + margins) - Reduced to pack tighter
+      double fraction = (260.0 / screenWidth).clamp(0.2, 0.85);
 
       // Re-initialize controller if fraction changes significantly
       if (_controller == null ||
