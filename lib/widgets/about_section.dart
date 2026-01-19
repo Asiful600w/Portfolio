@@ -387,14 +387,16 @@ class _BioCardState extends State<_BioCard> {
                         size: 16,
                       ),
                       const SizedBox(width: 8),
-                      _TypingText(
-                        text: "SYSTEM_BIO.EXE",
-                        isVisible: _isVisible,
-                        style: GoogleFonts.spaceMono(
-                          fontSize: 10,
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
+                      Flexible(
+                        child: _TypingText(
+                          text: "SYSTEM_BIO.EXE",
+                          isVisible: _isVisible,
+                          style: GoogleFonts.spaceMono(
+                            fontSize: 10,
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                          ),
                         ),
                       ),
                     ],
@@ -651,11 +653,14 @@ class _TagState extends State<_Tag> {
               color: _isHovered ? AppColors.primary : Colors.grey,
             ),
             const SizedBox(width: 8),
-            Text(
-              widget.text,
-              style: GoogleFonts.spaceMono(
-                fontSize: widget.fontSize,
-                color: Colors.grey[300],
+            Flexible(
+              child: Text(
+                widget.text,
+                style: GoogleFonts.spaceMono(
+                  fontSize: widget.fontSize,
+                  color: Colors.grey[300],
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

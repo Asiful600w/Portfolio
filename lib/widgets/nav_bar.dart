@@ -119,11 +119,11 @@ class _DesktopMenu extends StatelessWidget {
       children: [
         _menuItem('Home', onTap: onHomeClick),
         const SizedBox(width: 32),
-        _menuItem('Projects', onTap: onProjectsClick),
+        _menuItem('About', onTap: onProjectsClick),
         const SizedBox(width: 32),
-        _menuItem('About', onTap: onAboutClick),
+        _menuItem('Services', onTap: onAboutClick),
         const SizedBox(width: 32),
-        _menuItem('Services', onTap: onServicesClick),
+        _menuItem('Projects', onTap: onServicesClick),
       ],
     );
   }
