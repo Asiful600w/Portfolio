@@ -25,7 +25,8 @@ class SkillPlanet {
 }
 
 class OrbitalSkillMatrix extends StatefulWidget {
-  const OrbitalSkillMatrix({super.key});
+  final bool isMobile;
+  const OrbitalSkillMatrix({super.key, this.isMobile = false});
 
   @override
   State<OrbitalSkillMatrix> createState() => _OrbitalSkillMatrixState();
@@ -33,7 +34,7 @@ class OrbitalSkillMatrix extends StatefulWidget {
 
 class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
     with TickerProviderStateMixin {
-  // Controllers for rings to handle pausing
+  // ... (Keep existing state variables)
   late final AnimationController _ring1Controller;
   late final AnimationController _ring2Controller;
   late final AnimationController _ring3Controller;
@@ -45,6 +46,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
 
   SkillPlanet? _activePlanet;
 
+  // ... (Keep existing planet data lists)
   // Data
   final _planetsRing1 = const [
     SkillPlanet(
@@ -176,6 +178,12 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
 
   @override
   Widget build(BuildContext context) {
+    // Responsive Sizes
+    final ring1Size = widget.isMobile ? 160.0 : 300.0;
+    final ring2Size = widget.isMobile ? 300.0 : 550.0;
+    final ring3Size = widget.isMobile ? 440.0 : 800.0;
+    final ring4Size = widget.isMobile ? 580.0 : 1050.0;
+
     return RepaintBoundary(
       // OPTIMIZATION: Isolate painting
       child: VisibilityDetector(
@@ -216,7 +224,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
 
                 // 1. Background Layer (Back half of orbits + planets behind)
                 _OrbitRing(
-                  size: 1050,
+                  size: ring4Size,
                   yScale: 0.35,
                   controller: _ring4Controller,
                   breathingController: _breathingController,
@@ -228,7 +236,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                   expansionAnimation: _expansionAnimation,
                 ),
                 _OrbitRing(
-                  size: 300,
+                  size: ring1Size,
                   yScale: 0.35,
                   controller: _ring1Controller,
                   breathingController: _breathingController,
@@ -241,7 +249,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                 ),
 
                 _OrbitRing(
-                  size: 550,
+                  size: ring2Size,
                   yScale: 0.35,
                   controller: _ring2Controller,
                   breathingController: _breathingController,
@@ -254,7 +262,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                 ),
 
                 _OrbitRing(
-                  size: 800,
+                  size: ring3Size,
                   yScale: 0.35,
                   controller: _ring3Controller,
                   breathingController: _breathingController,
@@ -329,7 +337,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
 
                 // 3. Foreground Layer (Front half of orbits + planets in front)
                 _OrbitRing(
-                  size: 300,
+                  size: ring1Size,
                   yScale: 0.35,
                   controller: _ring1Controller,
                   breathingController: _breathingController,
@@ -342,7 +350,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                 ),
 
                 _OrbitRing(
-                  size: 550,
+                  size: ring2Size,
                   yScale: 0.35,
                   controller: _ring2Controller,
                   breathingController: _breathingController,
@@ -355,7 +363,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                 ),
 
                 _OrbitRing(
-                  size: 800,
+                  size: ring3Size,
                   yScale: 0.35,
                   controller: _ring3Controller,
                   breathingController: _breathingController,
@@ -368,7 +376,7 @@ class _OrbitalSkillMatrixState extends State<OrbitalSkillMatrix>
                 ),
 
                 _OrbitRing(
-                  size: 1050,
+                  size: ring4Size,
                   yScale: 0.35,
                   controller: _ring4Controller,
                   breathingController: _breathingController,
@@ -433,12 +441,14 @@ class _PlanetInfoBox extends StatelessWidget {
             children: [
               Icon(planet.icon, color: planet.color, size: 24),
               const SizedBox(width: 12),
-              Text(
-                planet.label,
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Expanded(
+                child: Text(
+                  planet.label,
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -593,32 +603,35 @@ class _OrbitRing extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  planet.icon,
-                                  color: planet.color,
-                                  size: isActive ? 40 : 24,
-                                ),
-                                if (isActive) const SizedBox(height: 8),
-                                if (planet.label.isNotEmpty)
-                                  AnimatedOpacity(
-                                    duration: 300.ms,
-                                    opacity: isOtherActive ? 0.0 : 1.0,
-                                    child: Text(
-                                      planet.label,
-                                      style: TextStyle(
-                                        fontSize: isActive ? 12 : 8,
-                                        fontWeight: isActive
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                        color: Colors.white70,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    planet.icon,
+                                    color: planet.color,
+                                    size: isActive ? 40 : 24,
+                                  ),
+                                  if (isActive) const SizedBox(height: 8),
+                                  if (planet.label.isNotEmpty)
+                                    AnimatedOpacity(
+                                      duration: 300.ms,
+                                      opacity: isOtherActive ? 0.0 : 1.0,
+                                      child: Text(
+                                        planet.label,
+                                        style: TextStyle(
+                                          fontSize: isActive ? 12 : 8,
+                                          fontWeight: isActive
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: Colors.white70,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                if (isActive) const SizedBox(height: 4),
-                              ],
+                                  if (isActive) const SizedBox(height: 4),
+                                ],
+                              ),
                             ),
                           ),
                         ),

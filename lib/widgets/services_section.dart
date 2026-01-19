@@ -152,8 +152,8 @@ class _ServicesSectionState extends State<ServicesSection> {
                         _ServiceCard(
                           title: "MVP Nexus",
                           subtitle: "CLASS: PROTOTYPE",
-                          price: "3k",
-                          priceSuffix: "CR",
+                          price: "100",
+                          priceSuffix: "\$",
                           priceNote: "// PER PROJECT EXECUTION",
                           features: const [
                             "Rapid Prototyping",
@@ -181,8 +181,8 @@ class _ServicesSectionState extends State<ServicesSection> {
                         _ServiceCard(
                           title: "Innovation Core",
                           subtitle: "CLASS: SCALABLE",
-                          price: "8.5k",
-                          priceSuffix: "CR",
+                          price: "250",
+                          priceSuffix: "\$",
                           priceNote: "// PER PROJECT EXECUTION",
                           features: const [
                             "Custom Animations Engine",

@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -347,7 +346,7 @@ class _BioCardState extends State<_BioCard> {
         }
       },
       child: _GlassPanel(
-        padding: const EdgeInsets.all(48),
+        padding: EdgeInsets.all(widget.isDesktop ? 48 : 24),
         child: Stack(
           children: [
             Positioned(
@@ -356,7 +355,7 @@ class _BioCardState extends State<_BioCard> {
               child: Text(
                 "01",
                 style: TextStyle(
-                  fontSize: 160,
+                  fontSize: widget.isDesktop ? 160 : 80,
                   fontWeight: FontWeight.bold,
                   color: Colors.white.withValues(alpha: 0.03),
                   height: 1,
@@ -405,7 +404,7 @@ class _BioCardState extends State<_BioCard> {
                 RichText(
                   text: TextSpan(
                     style: AppTextStyles.heroTitle.copyWith(
-                      fontSize: 64,
+                      fontSize: widget.isDesktop ? 64 : 32,
                       height: 0.9,
                     ),
                     children: [
@@ -444,7 +443,7 @@ class _BioCardState extends State<_BioCard> {
                       Text.rich(
                         TextSpan(
                           style: AppTextStyles.body.copyWith(
-                            fontSize: 18,
+                            fontSize: widget.isDesktop ? 18 : 14,
                             color: Colors.grey[400],
                           ),
                           children: [
@@ -467,7 +466,7 @@ class _BioCardState extends State<_BioCard> {
                       Text.rich(
                         TextSpan(
                           style: AppTextStyles.body.copyWith(
-                            fontSize: 18,
+                            fontSize: widget.isDesktop ? 18 : 14,
                             color: Colors.grey[400],
                           ),
                           children: const [
@@ -676,227 +675,26 @@ class _MobileSkillMatrix extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // 1. Skill Grid
+        const SizedBox(height: 24),
+        // Orbital Matrix Container
         LayoutBuilder(
           builder: (context, constraints) {
-            // 2 columns
-            final itemWidth = (constraints.maxWidth - 24) / 2;
-            return Wrap(
-              spacing: 24,
-              runSpacing: 24,
-              children: [
-                _MobileSkillCard(
-                  title: "Flutter",
-                  subtitle: "Framework",
-                  icon: Icons.layers,
-                  color: Colors.blue,
-                  width: itemWidth,
+            return AspectRatio(
+              aspectRatio: 1.4,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: const SizedBox(
+                  width: 600,
+                  height: 350,
+                  child: OrbitalSkillMatrix(isMobile: true),
                 ),
-                _MobileSkillCard(
-                  title: "Dart",
-                  subtitle: "Language",
-                  icon: Icons.code,
-                  color: Colors.blueAccent,
-                  width: itemWidth,
-                ),
-                _MobileSkillCard(
-                  title: "Firebase",
-                  subtitle: "Backend",
-                  icon: Icons.storage,
-                  color: Colors.amber,
-                  width: itemWidth,
-                ),
-                _MobileSkillCard(
-                  title: "Figma",
-                  subtitle: "Design",
-                  icon: Icons.palette,
-                  color: Colors.purpleAccent,
-                  width: itemWidth,
-                ),
-              ],
+              ),
             );
           },
-        ),
-        const SizedBox(height: 24),
-
-        // 2. Radar Chart Container
-        _GlassPanel(
-          padding: const EdgeInsets.all(24),
-          child: SizedBox(
-            width: double.infinity,
-            height: 350,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.hub, color: AppColors.primary, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Skill Matrix",
-                      style: AppTextStyles.heroSubtitle.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Center(
-                  child: CustomPaint(
-                    size: const Size(200, 200),
-                    painter: _RadarChartPainter(),
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
         ),
       ],
     );
   }
-}
-
-class _MobileSkillCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
-  final double width;
-
-  const _MobileSkillCard({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-    required this.width,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return _GlassPanel(
-      child: Container(
-        width: width,
-        constraints: const BoxConstraints(minHeight: 120),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 32),
-            const SizedBox(height: 12),
-            Text(
-              title,
-              style: AppTextStyles.heroSubtitle.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              subtitle,
-              style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _RadarChartPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2;
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.1)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-
-    // Draw Pentagon/Hexagon Grid (5 levels)
-    final sides = 6;
-    for (var i = 1; i <= 5; i++) {
-      final r = radius * (i / 5);
-      final path = Path();
-      for (var j = 0; j < sides; j++) {
-        final angle = (2 * math.pi * j) / sides - (math.pi / 2);
-        final x = center.dx + r * math.cos(angle);
-        final y = center.dy + r * math.sin(angle);
-        if (j == 0) {
-          path.moveTo(x, y);
-        } else {
-          path.lineTo(x, y);
-        }
-      }
-      path.close();
-      canvas.drawPath(path, paint);
-    }
-
-    // Draw Spokes
-    for (var j = 0; j < sides; j++) {
-      final angle = (2 * math.pi * j) / sides - (math.pi / 2);
-      canvas.drawLine(
-        center,
-        Offset(
-          center.dx + radius * math.cos(angle),
-          center.dy + radius * math.sin(angle),
-        ),
-        paint,
-      );
-
-      // Labels
-      final labelOffset = radius + 20;
-      final lx = center.dx + labelOffset * math.cos(angle);
-      final ly = center.dy + labelOffset * math.sin(angle);
-      final labels = ["UI Arch", "State", "Anim", "API", "Testing", "Perf"];
-      final textPainter = TextPainter(
-        text: TextSpan(
-          text: labels[j],
-          style: GoogleFonts.spaceMono(fontSize: 10, color: Colors.grey[400]),
-        ),
-        textDirection: TextDirection.ltr,
-      );
-      textPainter.layout();
-      textPainter.paint(
-        canvas,
-        Offset(lx - textPainter.width / 2, ly - textPainter.height / 2),
-      );
-    }
-
-    // Draw Data Shape
-    final dataPaint = Paint()
-      ..color = AppColors.primary
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-    final fillPaint = Paint()
-      ..color = AppColors.primary.withValues(alpha: 0.2)
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
-    final values = [0.9, 0.85, 0.95, 0.8, 0.75, 0.9]; // Mock values
-
-    for (var j = 0; j < sides; j++) {
-      final r = radius * values[j];
-      final angle = (2 * math.pi * j) / sides - (math.pi / 2);
-      final x = center.dx + r * math.cos(angle);
-      final y = center.dy + r * math.sin(angle);
-
-      if (j == 0) {
-        path.moveTo(x, y);
-      } else {
-        path.lineTo(x, y);
-      }
-
-      // Draw dots
-      canvas.drawCircle(Offset(x, y), 4, Paint()..color = AppColors.primary);
-    }
-    path.close();
-    canvas.drawPath(path, fillPaint);
-    canvas.drawPath(path, dataPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 class _GlassPanel extends StatelessWidget {
